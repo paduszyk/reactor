@@ -1,5 +1,8 @@
 # reactor
 
+[![CI](https://img.shields.io/github/actions/workflow/status/paduszyk/reactor/ci.yml?label=CI&logo=github)][ci]
+
+[![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)][poetry]
 [![Prettier](https://img.shields.io/badge/code%20style-prettier-1E2B33?logo=Prettier)][prettier]
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-fa6673.svg?logo=conventional-commits)][conventional-commits]
 [![License](https://img.shields.io/github/license/paduszyk/reactor)][license]
@@ -19,7 +22,9 @@ Created and maintained by [@paduszyk][paduszyk].
 
 Released under the [BSD 3-Clause License][license].
 
+[ci]: https://github.com/paduszyk/reactor/actions/workflows/ci.yml
 [conventional-commits]: https://conventionalcommits.org
 [license]: https://github.com/paduszyk/reactor/blob/main/LICENSE
 [paduszyk]: https://github.com/paduszyk
+[poetry]: https://python-poetry.org
 [prettier]: https://prettier.io
