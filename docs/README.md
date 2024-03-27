@@ -2,6 +2,7 @@
 
 [![CI](https://img.shields.io/github/actions/workflow/status/paduszyk/reactor/ci.yml?label=CI&logo=github)][ci]
 
+[![Django](https://img.shields.io/badge/Django-092e20?&logo=django&logoColor=white)][django]
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)][poetry]
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)][ruff]
 [![Prettier](https://img.shields.io/badge/code%20style-prettier-1E2B33?logo=Prettier)][prettier]
@@ -25,6 +26,7 @@ Released under the [BSD 3-Clause License][license].
 
 [ci]: https://github.com/paduszyk/reactor/actions/workflows/ci.yml
 [conventional-commits]: https://conventionalcommits.org
+[django]: https://www.djangoproject.com
 [license]: https://github.com/paduszyk/reactor/blob/main/LICENSE
 [paduszyk]: https://github.com/paduszyk
 [poetry]: https://python-poetry.org

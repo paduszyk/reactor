@@ -17,9 +17,14 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.11"
+django = "^5.0.3"
+django-configurations = { version = "^2.5.1", extras = ["database"] }
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.7.0"
 
 [tool.poetry.group.lint.dependencies]
 ruff = "^0.3.4"
+
+[tool.poetry.extras]
+"sqlite" = []
