@@ -1,5 +1,6 @@
 # reactor
 
+[![Prettier](https://img.shields.io/badge/code%20style-prettier-1E2B33?logo=Prettier)][prettier]
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-fa6673.svg?logo=conventional-commits)][conventional-commits]
 [![License](https://img.shields.io/github/license/paduszyk/reactor)][license]
 
@@ -21,3 +22,4 @@ Released under the [BSD 3-Clause License][license].
 [conventional-commits]: https://conventionalcommits.org
 [license]: https://github.com/paduszyk/reactor/blob/main/LICENSE
 [paduszyk]: https://github.com/paduszyk
+[prettier]: https://prettier.io
