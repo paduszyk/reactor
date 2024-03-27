@@ -39,7 +39,11 @@ class Common(Configuration):
 
     THIRD_PARTY_APPS = []
 
-    FIRST_PARTY_APPS = []
+    FIRST_PARTY_APPS = [
+        "reactor.apps",
+        "reactor.db",
+        "reactor.core",
+    ]
 
     LOCAL_APPS = []
 
