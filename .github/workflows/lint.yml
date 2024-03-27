@@ -29,3 +29,27 @@ jobs:
         with:
           globs: |
             docs/**/*.md
+  ruff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.2
+      - name: Cache Poetry
+        uses: actions/cache@v4.0.2
+        id: cache-poetry
+        with:
+          path: ~/.local
+          key: poetry
+      - name: Install Poetry
+        if: steps.cache-poetry.outputs.cache-hit != 'true'
+        uses: snok/install-poetry@v1.3.4
+      - name: Set up Python
+        uses: actions/setup-python@v5.1.0
+        with:
+          cache: poetry
+      - name: Install dependencies
+        run: poetry install --only lint
+      - name: Run Ruff checks
+        run: |
+          poetry run ruff check
+          poetry run ruff format

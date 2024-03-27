@@ -20,3 +20,6 @@ python = "^3.11"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.7.0"
+
+[tool.poetry.group.lint.dependencies]
+ruff = "^0.3.4"

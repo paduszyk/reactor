@@ -3,6 +3,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/paduszyk/reactor/ci.yml?label=CI&logo=github)][ci]
 
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)][poetry]
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)][ruff]
 [![Prettier](https://img.shields.io/badge/code%20style-prettier-1E2B33?logo=Prettier)][prettier]
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-fa6673.svg?logo=conventional-commits)][conventional-commits]
 [![License](https://img.shields.io/github/license/paduszyk/reactor)][license]
@@ -28,3 +29,4 @@ Released under the [BSD 3-Clause License][license].
 [paduszyk]: https://github.com/paduszyk
 [poetry]: https://python-poetry.org
 [prettier]: https://prettier.io
+[ruff]: https://github.com/astral-sh/ruff
