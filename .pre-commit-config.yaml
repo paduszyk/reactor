@@ -1,0 +1,29 @@
+# Pre-commit
+# https://pre-commit.com/#usage
+
+repos:
+  - repo: https://github.com/python-poetry/poetry
+    rev: "1.8.0"
+    hooks:
+      - id: poetry-check
+      - id: poetry-lock
+        args: [--no-update]
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: "v4.5.0"
+    hooks:
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-toml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: "v4.0.0-alpha.8"
+    hooks:
+      - id: prettier
+        args: [--no-error-on-unmatched-pattern]
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: "v0.12.1"
+    hooks:
+      - id: markdownlint-cli2
+        files: (docs)
