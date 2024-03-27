@@ -22,3 +22,11 @@ dist/
 # Django
 media/
 staticfiles/
+
+# Pytest
+.pytest_cache/
+
+# Coverage
+.coverage
+.coverage.xml
+.htmlcov/
