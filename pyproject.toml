@@ -1,0 +1,19 @@
+# Poetry
+# https://python-poetry.org/docs/pyproject/
+
+[tool.poetry]
+name = "reactor"
+version = "0.1.0"
+description = "Research Activity Output Repository"
+license = "BSD-3-Clause"
+authors = [
+  "Kamil Paduszyński <92403542+paduszyk@users.noreply.github.com>",
+]
+readme = "docs/README.md"
+repository = "https://github.com/paduszyk/reactor"
+packages = [
+  { include = "**/*", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.11"
