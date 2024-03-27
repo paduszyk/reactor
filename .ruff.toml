@@ -13,6 +13,7 @@ select = [
   "I",
   "D",
   "B",
+  "PT",
 ]
 ignore = ["E501", "D1", "D205"]
 
@@ -26,9 +27,11 @@ section-order = [
   "third-party",
   "django",
   "first-party",
+  "tests",
   "local-folder",
 ]
 known-first-party = ["reactor"]
 
 [lint.isort.sections]
 "django" = ["django"]
+"tests" = ["tests"]

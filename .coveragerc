@@ -1,0 +1,22 @@
+; Coverage.py
+; https://coverage.readthedocs.io/en/latest/config.html
+
+[run]
+branch = True
+source = src
+
+[report]
+omit =
+  **/conf/**
+  **/manage.py
+  **/settings.py
+  **/urls.py
+show_missing = True
+skip_covered = True
+skip_empty = True
+
+[html]
+directory = .htmlcov
+
+[xml]
+output = .coverage.xml
