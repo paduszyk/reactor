@@ -27,3 +27,9 @@ repos:
     hooks:
       - id: markdownlint-cli2
         files: (docs)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: "v0.3.4"
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
