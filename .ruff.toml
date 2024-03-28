@@ -27,6 +27,7 @@ section-order = [
   "third-party",
   "django",
   "first-party",
+  "local-apps",
   "tests",
   "local-folder",
 ]
@@ -34,4 +35,14 @@ known-first-party = ["reactor"]
 
 [lint.isort.sections]
 "django" = ["django"]
+"local-apps" = [
+  "bibliometrics",
+  "contracts",
+  "personal_data",
+  "publishing_media",
+  "research_works",
+  "science_evaluation",
+  "units_network",
+  "work_contributions",
+]
 "tests" = ["tests"]
