@@ -229,6 +229,20 @@ class Local(Debug):
 
     DOTENV = Debug.BASE_DIR / ".env"
 
+    @property
+    def THIRD_PARTY_APPS(self):
+        return super().THIRD_PARTY_APPS + [
+            "schema_graph",
+        ]
+
+    @classmethod
+    def get_urlpatterns(cls):
+        from schema_graph.views import Schema
+
+        return super().get_urlpatterns() + [
+            path("schema/", Schema.as_view()),
+        ]
+
 
 class CI(Debug):
     """Represents settings specific to continuous integration environments."""

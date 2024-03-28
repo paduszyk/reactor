@@ -21,6 +21,7 @@ django = "^5.0.3"
 django-configurations = { version = "^2.5.1", extras = ["database"] }
 
 [tool.poetry.group.dev.dependencies]
+django-schema-graph = "^3.1.0"
 pre-commit = "^3.7.0"
 
 [tool.poetry.group.lint.dependencies]
