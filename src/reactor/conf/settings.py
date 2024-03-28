@@ -45,7 +45,16 @@ class Common(Configuration):
         "reactor.core",
     ]
 
-    LOCAL_APPS = []
+    LOCAL_APPS = [
+        "bibliometrics",
+        "contracts",
+        "personal_data",
+        "publishing_media",
+        "research_works",
+        "science_evaluation",
+        "units_network",
+        "work_contributions",
+    ]
 
     # URLs
 
