@@ -8,6 +8,7 @@ source = src
 [report]
 omit =
   **/conf/**
+  **/migrations/**
   **/manage.py
   **/settings.py
   **/urls.py

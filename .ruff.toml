@@ -3,6 +3,9 @@
 # https://docs.astral.sh/ruff/rules/
 # https://docs.astral.sh/ruff/settings/
 
+extend-exclude = [
+   "**/migrations/**",
+]
 target-version = "py311"
 
 [lint]
