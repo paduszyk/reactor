@@ -1,6 +1,7 @@
 # reactor
 
 [![Pre-commit](https://img.shields.io/github/actions/workflow/status/paduszyk/reactor/pre-commit-run.yml?style=flat-square&logo=pre-commit&label=pre-commit)][pre-commit]
+[![Tests](https://img.shields.io/github/actions/workflow/status/paduszyk/reactor/test.yml?style=flat-square&logo=github&label=tests)][tests]
 
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json&style=flat-square)][poetry]
 [![Ruff](https://img.shields.io/endpoint?style=flat-square&url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)][ruff]
@@ -22,3 +23,4 @@ Released under the [BSD 3-Clause License][license].
 [pre-commit]: https://github.com/paduszyk/reactor/actions/workflows/pre-commit-run.yml
 [prettier]: https://prettier.io
 [ruff]: https://docs.astral.sh/ruff/
+[tests]: https://github.com/paduszyk/reactor/actions/workflows/test.yml
