@@ -1,0 +1,8 @@
+# markdownlint-cli2
+# https://github.com/DavidAnson/markdownlint-cli2
+
+gitignore: true
+globs:
+  - "**/*.md"
+ignores:
+  - "LICENSE"
