@@ -1,0 +1,19 @@
+name: Poetry
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  poetry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+      - uses: snok/install-poetry@v1
+      - run: poetry check --lock
+      - run: poetry lock --no-update
