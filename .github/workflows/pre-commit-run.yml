@@ -19,3 +19,9 @@ jobs:
           SKIP: |-
             poetry-check,
             poetry-lock,
+            django-check,
+            django-collectstatic,
+            django-makemessages,
+            django-compilemessages,
+            django-makemigrations,
+            django-migrate,

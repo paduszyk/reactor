@@ -12,3 +12,16 @@ __pycache__/
 
 # Coverage.py
 .coverage
+
+# Django assets
+media/
+staticfiles/
+
+# Translation files
+*.mo
+
+# Development DB files
+*.sqlite3
+
+# Environment variables
+.env
