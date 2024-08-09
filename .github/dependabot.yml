@@ -1,0 +1,28 @@
+# Dependabot
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates
+
+version: 2
+
+updates:
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+    allow:
+      - dependency-type: all
+    labels: []
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    labels: []
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    labels: []
+  - package-ecosystem: devcontainers
+    directory: "/"
+    schedule:
+      interval: weekly
+    labels: []
