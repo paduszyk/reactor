@@ -9,3 +9,44 @@ python = "^3.12"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.8.0"
+
+[tool.poetry.group.lint.dependencies]
+ruff = "^0.5.7"
+
+# Ruff
+# https://docs.astral.sh/ruff/
+
+[tool.ruff]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+  "ALL",
+]
+extend-select = [
+  "RUF100",
+]
+ignore = [
+  "ANN",
+  "D",
+  "N",
+  "PL",
+  "PYI",
+  "RUF",
+  "TCH",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/__init__.py" = ["F403"]
+
+[tool.ruff.lint.isort]
+known-first-party = [
+  "reactor",
+]
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "first-party",
+  "local-folder",
+]
