@@ -8,8 +8,10 @@ package-mode = false
 python = "^3.12"
 django = "^5.0.8"
 django-configurations = {version = "^2.5.1", extras = ["database"]}
+gunicorn = {version = "^22.0.0", optional = true}
 pillow = "^10.4.0"
 psycopg = {version = "^3.2.1", extras = ["binary"]}
+whitenoise = {version = "^6.7.0", optional = true}
 
 [tool.poetry.group.dev.dependencies]
 django-debug-toolbar = "^4.4.6"
@@ -31,6 +33,12 @@ pytest-cov = "^5.0.0"
 pytest-custom-exit-code = "^0.3.0"
 pytest-django = "^4.8.0"
 pytest-mock = "^3.14.0"
+
+[tool.poetry.extras]
+prod = [
+  "gunicorn",
+  "whitenoise",
+]
 
 # Ruff
 # https://docs.astral.sh/ruff/
@@ -154,6 +162,7 @@ omit = [
   "**/migrations/**/*.py",
   "**/settings.py",
   "**/urls.py",
+  "**/wsgi.py",
 ]
 show_missing = true
 skip_covered = true

@@ -1,6 +1,7 @@
 __all__ = [
     "CI",
     "Dev",
+    "Prod",
 ]
 
 from pathlib import Path
@@ -197,3 +198,46 @@ class Dev(Debug):
 
 class CI(Debug):
     """Encapsulates settings specific to CI environments."""
+
+
+class Prod(Common):
+    """Encapsulates settings specific to production environments."""
+
+    # Debugging mode
+
+    DEBUG = False
+
+    # Security
+
+    SECRET_KEY = values.SecretValue()
+
+    ALLOWED_HOSTS = values.ListValue()
+
+    CSRF_TRUSTED_ORIGINS = values.ListValue()
+
+    # Storages
+
+    STORAGES = {
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        },
+    }
+
+    # WSGI
+
+    WSGI_APPLICATION = "reactor.conf.wsgi.application"
+
+    @classmethod
+    def pre_setup(cls):
+        super().pre_setup()
+
+        # Insert the `whitenoise` middleware right after Django's `SecurityMiddleware`:
+        # https://whitenoise.readthedocs.io/en/stable/django.html#enable-whitenoise.
+
+        security_middleware_index = cls.MIDDLEWARE.index(
+            "django.middleware.security.SecurityMiddleware",
+        )
+        cls.MIDDLEWARE.insert(
+            security_middleware_index + 1,
+            "whitenoise.middleware.WhiteNoiseMiddleware",
+        )
