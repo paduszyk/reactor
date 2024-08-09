@@ -45,6 +45,7 @@ class Common(Configuration):
         #
         # First-party apps
         "reactor.apps",
+        "reactor.core",
     ]
 
     # Middleware
