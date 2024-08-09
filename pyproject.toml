@@ -7,6 +7,7 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.12"
 django = "^5.0.8"
+django-appconf = "^1.0.6"
 django-configurations = {version = "^2.5.1", extras = ["database"]}
 gunicorn = {version = "^22.0.0", optional = true}
 pillow = "^10.4.0"
