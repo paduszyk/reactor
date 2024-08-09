@@ -1,0 +1,36 @@
+name: Django
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  django:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install --yes gettext
+      - uses: actions/setup-python@v5
+      - uses: snok/install-poetry@v1
+      - run: poetry install --only main
+      - run: poetry run python manage.py check --fail-level=ERROR
+      - run: poetry run python manage.py collectstatic --dry-run --no-input
+      - run: poetry run python manage.py makemessages --all --add-location=file
+      - run: poetry run python manage.py compilemessages
+      - run: poetry run python manage.py makemigrations --check --dry-run --no-input
+      - run: poetry run python manage.py migrate --no-input
