@@ -42,6 +42,9 @@ class Common(Configuration):
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
+        #
+        # First-party apps
+        "reactor.apps",
     ]
 
     # Middleware
