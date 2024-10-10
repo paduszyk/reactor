@@ -1,11 +1,14 @@
 __pycache__/
+.coverage
 .env
+.htmlcov/
 .pytest_cache/
 .ruff_cache/
 .venv/
 .vscode/
 *.mo
 *.sqlite3
+coverage.xml
 media/
 node_modules/
 staticfiles/

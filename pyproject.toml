@@ -23,6 +23,7 @@ ruff = "^0.6.9"
 [tool.poetry.group.test.dependencies]
 model-bakery = "^1.19.5"
 pytest = "^8.3.3"
+pytest-cov = "^5.0.0"
 pytest-custom-exit-code = "^0.3.0"
 pytest-django = "^4.9.0"
 pytest-mock = "^3.14.0"
@@ -83,6 +84,10 @@ addopts = [
   "-ra",
   "--suppress-no-test-exit-code",
   "--ds=tests.settings",
+  "--cov",
+  "--cov-branch",
+  "--cov-report=term-missing:skip-covered",
+  "--cov-report=xml",
 ]
 python_files = [
   "test_*.py",
@@ -90,3 +95,25 @@ python_files = [
 ]
 pythonpath = [".", "src/"]
 testpaths = ["tests/"]
+
+[tool.coverage.run]
+source = ["src/"]
+
+[tool.coverage.report]
+exclude_also = [
+  "@(abc\\.)?abstractmethod",
+  "def __repr__",
+  "def __str__",
+  "raise NotImplementedError",
+]
+omit = [
+  "**/conf/**",
+  "**/manage.py",
+  "**/migrations/**",
+]
+
+[tool.coverage.xml]
+output = "coverage.xml"
+
+[tool.coverage.html]
+directory = ".htmlcov/"
