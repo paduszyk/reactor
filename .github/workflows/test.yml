@@ -41,3 +41,18 @@ jobs:
           cache: poetry
       - run: poetry install --only main,test --extras ${{ matrix.database-engine }}
       - run: poetry run pytest
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.database-engine }}
+          path: "./coverage.xml"
+          if-no-files-found: error
+  codecov:
+    needs:
+      - pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+      - uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
