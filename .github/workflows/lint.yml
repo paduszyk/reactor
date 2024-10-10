@@ -55,3 +55,20 @@ jobs:
       - run: python -m pip install --upgrade pip
       - run: python -m pip install ruff
       - run: ruff ${{ matrix.command }}
+  djlint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        flag:
+          - --lint
+          - --reformat
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+          cache: pip
+      - run: python -m pip install --upgrade pip
+      - run: python -m pip install djlint
+      - run: djlint ${{ matrix.flag }} .

@@ -1,6 +1,11 @@
 __pycache__/
+.env
 .pytest_cache/
 .ruff_cache/
 .venv/
 .vscode/
+*.mo
+*.sqlite3
+media/
 node_modules/
+staticfiles/
