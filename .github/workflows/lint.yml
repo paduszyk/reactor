@@ -29,3 +29,12 @@ jobs:
           cache: npm
       - run: npm install prettier@latest
       - run: npx prettier --check .
+  markdownlint-cli2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          cache: npm
+      - run: npm install markdownlint-cli2@latest
+      - run: npx markdownlint-cli2
