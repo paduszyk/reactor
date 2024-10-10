@@ -1,0 +1,22 @@
+name: Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          cache: npm
+      - run: npm install @commitlint/{cli,config-conventional}
+      - run: npx commitlint ${{ github.event_name == 'push' && '--last' || format('--from {0}~{1} --to {0}', github.event.pull_request.head.sha, github.event.pull_request.commits) }} --verbose
