@@ -4,6 +4,7 @@ default_stages:
 default_install_hook_types:
   - commit-msg
   - pre-commit
+  - pre-push
 
 repos:
   - repo: local
@@ -40,3 +41,10 @@ repos:
         entry: poetry run ruff format
         language: system
         pass_filenames: false
+      - id: pytest
+        name: pytest
+        entry: poetry run pytest
+        language: system
+        pass_filenames: false
+        stages:
+          - pre-push
