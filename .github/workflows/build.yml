@@ -25,3 +25,37 @@ jobs:
           python-version-file: .python-version
           cache: poetry
       - run: poetry install
+  django:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        database-engine:
+          - postgres
+          - sqlite
+      fail-fast: false
+    env:
+      DATABASE_ENGINE: ${{ matrix.database-engine }}
+    services:
+      postgres:
+        image: ${{ matrix.database-engine == 'postgres' && 'postgres:latest' || '' }}
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        id: poetry-cache
+        with:
+          path: ~/.local
+          key: poetry
+      - if: ${{ steps.poetry-cache.outputs.cache-hit != 'true'}}
+        uses: snok/install-poetry@v1
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+          cache: poetry
+      - run: poetry install --extras ${{ matrix.database-engine }}
+      - run: poetry run python src/manage.py check
+      - run: poetry run python src/manage.py makemigrations --check --dry-run --no-input
+      - run: poetry run python src/manage.py migrate --no-input

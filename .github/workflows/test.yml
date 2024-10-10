@@ -11,6 +11,21 @@ on:
 jobs:
   pytest:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        database-engine:
+          - postgres
+          - sqlite
+      fail-fast: false
+    env:
+      DATABASE_ENGINE: ${{ matrix.database-engine }}
+    services:
+      postgres:
+        image: ${{ matrix.database-engine == 'postgres' && 'postgres:latest' || '' }}
+        env:
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
@@ -24,5 +39,5 @@ jobs:
         with:
           python-version-file: .python-version
           cache: poetry
-      - run: poetry install --only main,test
+      - run: poetry install --only main,test --extras ${{ matrix.database-engine }}
       - run: poetry run pytest

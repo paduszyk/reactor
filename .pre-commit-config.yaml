@@ -48,3 +48,28 @@ repos:
         pass_filenames: false
         stages:
           - pre-push
+      - id: djlint-lint
+        name: djlint-lint
+        entry: poetry run djlint --lint .
+        language: system
+        pass_filenames: false
+      - id: djlint-reformat
+        name: djlint-reformat
+        entry: poetry run djlint --reformat .
+        language: system
+        pass_filenames: false
+      - id: django-check
+        name: django-check
+        language: system
+        entry: poetry run python src/manage.py check
+        pass_filenames: false
+      - id: django-makemigrations
+        name: django-makemigrations
+        language: system
+        entry: poetry run python src/manage.py makemigrations --check --dry-run --no-input
+        pass_filenames: false
+      - id: django-makemessages
+        name: django-makemessages
+        language: system
+        entry: poetry run python src/manage.py makemessages --all --no-location
+        pass_filenames: false
