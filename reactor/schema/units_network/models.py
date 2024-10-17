@@ -4,11 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from reactor.db import models
 
 
-class Unit(models.Model):
-    name = models.CharField(
-        verbose_name=_("name"),
-        max_length=255,
-    )
+class Unit(models.NameModel):
     contracts = GenericRelation(
         to="human_resources.Contract",
         content_type_field="unit_type",

@@ -46,33 +46,19 @@ class Person(models.Model):
         verbose_name_plural = _("persons")
 
 
-class Status(models.Model):
-    name = models.CharField(
-        verbose_name=_("name"),
-        max_length=255,
-    )
-
+class Status(models.NameModel):
     class Meta:
         verbose_name = _("status")
         verbose_name_plural = _("statuses")
 
 
-class Group(models.Model):
-    name = models.CharField(
-        verbose_name=_("name"),
-        max_length=255,
-    )
-
+class Group(models.NameModel):
     class Meta:
         verbose_name = _("group")
         verbose_name_plural = _("groups")
 
 
-class Subgroup(models.Model):
-    name = models.CharField(
-        verbose_name=_("name"),
-        max_length=255,
-    )
+class Subgroup(models.NameModel):
     group = models.ForeignKey(
         to="human_resources.Group",
         on_delete=models.CASCADE,
@@ -86,11 +72,7 @@ class Subgroup(models.Model):
         verbose_name_plural = _("subgroups")
 
 
-class Position(models.Model):
-    name = models.CharField(
-        verbose_name=_("name"),
-        max_length=255,
-    )
+class Position(models.NameModel):
     subgroups = models.ManyToManyField(
         to="human_resources.Subgroup",
         verbose_name=_("subgroups"),

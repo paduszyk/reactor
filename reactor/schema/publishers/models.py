@@ -3,12 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from reactor.db import models
 
 
-class PublishingHouse(models.Model):
-    name = models.CharField(
-        verbose_name=_("name"),
-        max_length=255,
-    )
-
+class PublishingHouse(models.NameModel):
     class Meta:
         verbose_name = _("publishing house")
         verbose_name_plural = _("publishing houses")
