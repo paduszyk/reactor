@@ -3,6 +3,8 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.13"
+django = "^5.1.2"
+django-environ = "^0.11.2"
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.0.1"
@@ -19,4 +21,25 @@ ignore = [
   "D",
   "N",
   "RUF012",
+]
+
+[tool.ruff.lint.isort]
+known-first-party = [
+  "reactor",
+]
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "django",
+  "first-party",
+  "local-folder",
+]
+
+[tool.ruff.lint.isort.sections]
+django = ["django"]
+
+[tool.ruff.lint.flake8-self]
+ignore-names = [
+  "_meta",
 ]
