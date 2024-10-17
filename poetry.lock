@@ -146,6 +146,36 @@ attrs = ">=21.4.0"
 cattrs = ">=22.1.0"
 
 [[package]]
+name = "django-xlsx-serializer"
+version = "1.0.1"
+description = "Load/dump Django models from/to Excel 2007+ workbooks"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "django_xlsx_serializer-1.0.1-py3-none-any.whl", hash = "sha256:ad81a1260b7056714b5e773ae2dd4091222827b6816420bc258b4fd48758da1d"},
+    {file = "django_xlsx_serializer-1.0.1.tar.gz", hash = "sha256:ea3e6b3c406327223ae1d3970907721d0f39ceff2c771d72dd02a704e048f983"},
+]
+
+[package.dependencies]
+django = ">=3.2,<5.2"
+openpyxl = "<4"
+typing-extensions = "<5"
+
+[package.extras]
+dev = ["commitizen (<4)", "django-stubs[compatible-mypy] (<6)", "nox", "pre-commit (<4)", "psycopg2-binary (<3)", "pytest (<9)", "pytest-cov (<6)", "pytest-custom-exit-code (<1)", "pytest-django (<5)", "python-dotenv (<2)", "ruff (<1)", "types-openpyxl (<4)"]
+
+[[package]]
+name = "et-xmlfile"
+version = "1.1.0"
+description = "An implementation of lxml.xmlfile for the standard library"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "et_xmlfile-1.1.0-py3-none-any.whl", hash = "sha256:a2ba85d1d6a74ef63837eed693bcb89c3f752169b0e3e7ae5b16ca5e1b3deada"},
+    {file = "et_xmlfile-1.1.0.tar.gz", hash = "sha256:8eb9e2bc2f8c97e37a2dc85a09ecdcdec9d8a396530a6d5a33b30b9a92da0c5c"},
+]
+
+[[package]]
 name = "filelock"
 version = "3.16.1"
 description = "A platform independent file lock."
@@ -185,6 +215,20 @@ files = [
     {file = "nodeenv-1.9.1-py2.py3-none-any.whl", hash = "sha256:ba11c9782d29c27c70ffbdda2d7415098754709be8a7056d79a737cd901155c9"},
     {file = "nodeenv-1.9.1.tar.gz", hash = "sha256:6ec12890a2dab7946721edbfbcd91f3319c6ccc9aec47be7c7e6b7011ee6645f"},
 ]
+
+[[package]]
+name = "openpyxl"
+version = "3.1.5"
+description = "A Python library to read/write Excel 2010 xlsx/xlsm files"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "openpyxl-3.1.5-py2.py3-none-any.whl", hash = "sha256:5282c12b107bffeef825f4617dc029afaf41d0ea60823bbb665ef3079dc79de2"},
+    {file = "openpyxl-3.1.5.tar.gz", hash = "sha256:cf0e3cf56142039133628b5acffe8ef0c12bc902d2aadd3e0fe5878dc08d1050"},
+]
+
+[package.dependencies]
+et-xmlfile = "*"
 
 [[package]]
 name = "platformdirs"
@@ -325,6 +369,17 @@ dev = ["build", "hatch"]
 doc = ["sphinx"]
 
 [[package]]
+name = "typing-extensions"
+version = "4.12.2"
+description = "Backported and Experimental Type Hints for Python 3.8+"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "typing_extensions-4.12.2-py3-none-any.whl", hash = "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d"},
+    {file = "typing_extensions-4.12.2.tar.gz", hash = "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"},
+]
+
+[[package]]
 name = "tzdata"
 version = "2024.2"
 description = "Provider of IANA time zone data"
@@ -358,4 +413,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.13"
-content-hash = "a66f34f31d0043b9a2906f95e56024924abb81474d51d0763e5350f7ba18b730"
+content-hash = "a18ebe6c3c44ea3c9bfca5d8775c7e2a7a088222e180903e3d2f368864817c9e"

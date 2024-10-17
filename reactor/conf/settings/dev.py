@@ -29,6 +29,7 @@ class Settings(debug.Settings):
             *super().INSTALLED_APPS,
             "debug_toolbar",
             "schema_graph",
+            "xlsx_serializer",
         ]
 
     # Middleware
