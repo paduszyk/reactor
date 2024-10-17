@@ -34,6 +34,14 @@ class Settings(base.Settings):
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
+        #
+        # Schema apps
+        "reactor.schema.bibliometrics",
+        "reactor.schema.human_resources",
+        "reactor.schema.publishers",
+        "reactor.schema.research_output",
+        "reactor.schema.science_classification",
+        "reactor.schema.units_network",
     ]
 
     # Middleware

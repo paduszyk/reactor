@@ -12,6 +12,9 @@ ruff = "^0.6.9"
 
 [tool.ruff]
 target-version = "py313"
+extend-exclude = [
+  "**/migrations/**/*.py",
+]
 
 [tool.ruff.lint]
 select = ["ALL"]

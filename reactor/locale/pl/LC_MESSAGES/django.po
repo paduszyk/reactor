@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-17 14:14+0200\n"
+"POT-Creation-Date: 2024-10-17 16:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,3 +25,198 @@ msgstr "angielski"
 
 msgid "Polish"
 msgstr "polski"
+
+msgid "Bibliometrics"
+msgstr "Bibliometria"
+
+msgid "2-year value"
+msgstr "wartość 2-letnia"
+
+msgid "5-year value"
+msgstr "wartość 5-letnia"
+
+msgid "year published"
+msgstr "rok publikacji"
+
+msgid "journal"
+msgstr "czasopismo"
+
+msgid "Impact Factor"
+msgstr "Impact Factor"
+
+msgid "Impact Factors"
+msgstr "Impact Factory"
+
+msgid "value"
+msgstr "wartość"
+
+msgid "date published"
+msgstr "data publikacji"
+
+msgid "ministerial rating"
+msgstr "punktacja ministerialna"
+
+msgid "ministerial ratings"
+msgstr "punktacje ministerialne"
+
+msgid "Human Resources"
+msgstr "Kadry"
+
+msgid "man"
+msgstr "mężczyzna"
+
+msgid "woman"
+msgstr "kobieta"
+
+msgid "last name"
+msgstr "nazwisko"
+
+msgid "given names"
+msgstr "imiona"
+
+msgid "user"
+msgstr "użytkownik"
+
+msgid "gender"
+msgstr "płeć"
+
+msgid "degree"
+msgstr "stopień"
+
+msgid "person"
+msgstr "osoba"
+
+msgid "persons"
+msgstr "osoby"
+
+msgid "name"
+msgstr "nazwa"
+
+msgid "status"
+msgstr "status"
+
+msgid "statuses"
+msgstr "statusy"
+
+msgid "group"
+msgstr "grupa"
+
+msgid "groups"
+msgstr "grupy"
+
+msgid "subgroup"
+msgstr "podgrupa"
+
+msgid "subgroups"
+msgstr "podgrupy"
+
+msgid "position"
+msgstr "stanowisko"
+
+msgid "positions"
+msgstr "stanowiska"
+
+msgid "disciplines"
+msgstr "dyscypliny"
+
+msgid "unit type"
+msgstr "rodzaj jednostki"
+
+msgid "unit ID"
+msgstr "ID jednostki"
+
+msgid "contract"
+msgstr "kontrakt"
+
+msgid "contracts"
+msgstr "kontrakty"
+
+msgid "Publishers"
+msgstr "Wydawnictwa"
+
+msgid "publishing house"
+msgstr "oficyna wydawnicza"
+
+msgid "publishing houses"
+msgstr "oficyny wydawnicze"
+
+msgid "journals"
+msgstr "czasopisma"
+
+msgid "Research Output"
+msgstr "Dorobek naukowy"
+
+msgid "title"
+msgstr "tytuł"
+
+msgid "DOI"
+msgstr "DOI"
+
+msgid "volume"
+msgstr "wolumin/tom"
+
+msgid "issue"
+msgstr "wydanie/numer"
+
+msgid "pagination"
+msgstr "paginacja"
+
+msgid "article"
+msgstr "artykuł"
+
+msgid "articles"
+msgstr "artykuły"
+
+msgid "alias"
+msgstr "alias"
+
+msgid "author"
+msgstr "autor"
+
+msgid "authors"
+msgstr "autorzy"
+
+msgid "order"
+msgstr "kolejność"
+
+msgid "discipline"
+msgstr "dyscyplina"
+
+msgid "article contribution"
+msgstr "udział w artykule"
+
+msgid "article contributions"
+msgstr "udziały w artykułach"
+
+msgid "Science Classification"
+msgstr "Klasyfikacja nauki"
+
+msgid "degrees"
+msgstr "stopnie"
+
+msgid "domain"
+msgstr "dziedzina"
+
+msgid "domains"
+msgstr "dziedziny"
+
+msgid "Units Network"
+msgstr "Sieć jednostek"
+
+msgid "university"
+msgstr "uczelnia"
+
+msgid "universities"
+msgstr "uczelnie"
+
+msgid "faculty"
+msgstr "wydział"
+
+msgid "faculties"
+msgstr "wydziały"
+
+msgid "department"
+msgstr "katedra"
+
+msgid "departments"
+msgstr "katedry"
