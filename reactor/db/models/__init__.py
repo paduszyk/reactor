@@ -1,4 +1,4 @@
-from django.db.models import *  # noqa: F403
+from django.db.models import *
 
-from .base import *  # noqa: F403
-from .name import *  # noqa: F403
+from .base import *
+from .name import *
