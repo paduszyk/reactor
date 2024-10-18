@@ -6,3 +6,26 @@ python = "^3.13"
 
 [tool.poetry.group.local.dependencies]
 pre-commit = "^4.0.1"
+
+[tool.poetry.group.lint.dependencies]
+ruff = "^0.7.0"
+
+[tool.ruff]
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "ANN",
+  "ARG",
+  "D1",
+  "D205",
+  "N",
+  "RUF012",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401", "F403"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
