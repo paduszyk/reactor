@@ -36,6 +36,10 @@ class Settings(base.Settings):
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
+        #
+        # Project-level apps
+        "reactor.apps",
+        "reactor.db",
     ]
 
     # Middleware
