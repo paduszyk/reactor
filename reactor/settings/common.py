@@ -30,7 +30,6 @@ class Settings(base.Settings):
     # Apps
 
     INSTALLED_APPS = [
-        "django.contrib.admin",
         "django.contrib.auth",
         "django.contrib.contenttypes",
         "django.contrib.sessions",
@@ -38,6 +37,7 @@ class Settings(base.Settings):
         "django.contrib.staticfiles",
         #
         # Project-level apps
+        "reactor.admin",
         "reactor.apps",
         "reactor.db",
         #
