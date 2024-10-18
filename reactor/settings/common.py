@@ -40,6 +40,14 @@ class Settings(base.Settings):
         # Project-level apps
         "reactor.apps",
         "reactor.db",
+        #
+        # Database schema apps
+        "reactor.schema.bibliometrics",
+        "reactor.schema.human_resources",
+        "reactor.schema.publishers",
+        "reactor.schema.research_output",
+        "reactor.schema.science_classification",
+        "reactor.schema.units_network",
     ]
 
     # Middleware
