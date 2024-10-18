@@ -3,12 +3,20 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.13"
+django = "^5.1.2"
+django-environ = "^0.11.2"
+pillow = "^11.0.0"
+psycopg = {version = "^3.2.3", optional = true, extras = ["binary"]}
 
 [tool.poetry.group.local.dependencies]
 pre-commit = "^4.0.1"
 
 [tool.poetry.group.lint.dependencies]
 ruff = "^0.7.0"
+
+[tool.poetry.extras]
+postgres = ["psycopg"]
+sqlite = []
 
 [tool.ruff]
 target-version = "py313"
@@ -29,3 +37,22 @@ ignore = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.ruff.lint.isort]
+known-first-party = [
+  "reactor",
+]
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "django",
+  "first-party",
+  "local-folder",
+]
+
+[tool.ruff.lint.isort.sections]
+django = ["django"]
+
+[tool.ruff.lint.flake8-self]
+ignore-names = ["_meta"]
