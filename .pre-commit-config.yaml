@@ -1,0 +1,24 @@
+default_stages:
+  - pre-commit
+
+default_install_hook_types:
+  - pre-commit
+
+repos:
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        entry: npx prettier --check .
+        language: system
+        pass_filenames: false
+      - id: markdownlint
+        name: markdownlint
+        entry: npx markdownlint-cli2 .
+        language: system
+        pass_filenames: false
+      - id: poetry
+        name: poetry
+        entry: poetry check --lock
+        language: system
+        pass_filenames: false
