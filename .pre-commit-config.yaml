@@ -22,3 +22,13 @@ repos:
         entry: poetry check --lock
         language: system
         pass_filenames: false
+      - id: ruff-check
+        name: ruff (check)
+        entry: poetry run ruff check
+        language: system
+        pass_filenames: false
+      - id: ruff-format
+        name: ruff (format)
+        entry: poetry run ruff format
+        language: system
+        pass_filenames: false
