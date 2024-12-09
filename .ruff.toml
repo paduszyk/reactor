@@ -11,6 +11,7 @@ select = ["ALL"]
 
 [lint.per-file-ignores]
 "**/settings*.py" = ["N802"]
+"**/test*.py" = ["S101"]
 
 [lint.isort]
 known-first-party = ["reactor"]
