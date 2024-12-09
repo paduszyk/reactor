@@ -6,6 +6,9 @@ dependencies = [
   "django>=5.1.4",
 ]
 
+[project.optional-dependencies]
+sqlite = []
+
 [dependency-groups]
 local = [
   "django-debug-toolbar>=4.4.6",
