@@ -1,0 +1,32 @@
+name: Django
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  django:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        database-engine:
+          - sqlite
+      fail-fast: false
+    env:
+      DATABASE_ENGINE: ${{ matrix.database-engine }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - run: uv sync --extra ${{ matrix.database-engine }} --frozen
+      - run: uv run manage.py check
+      - run: uv run manage.py makemigrations --check --dry-run --no-input
+      - run: uv run manage.py migrate --no-input
