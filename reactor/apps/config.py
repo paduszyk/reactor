@@ -39,6 +39,15 @@ class AppConfig(apps.AppConfig):
     def _connect_signals(self):
         self._import_module("signals")
 
+        from reactor.db.models import Model
+        from reactor.db.models.signals import connect_signals
+
+        models = self.get_models()
+
+        for model in models:
+            if issubclass(model, Model):
+                connect_signals(model)
+
     def _models_ready(self):
         from reactor.db.models import Model
 
