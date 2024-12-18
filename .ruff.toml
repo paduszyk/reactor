@@ -26,3 +26,6 @@ section-order = [
 
 [lint.isort.sections]
 django = ["django"]
+
+[lint.flake8-self]
+ignore-names = ["_meta"]
