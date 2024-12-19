@@ -1,3 +1,6 @@
+extend-exclude = [
+  "**/migrations/*.py",
+]
 target-version = "py313"
 
 [lint]
