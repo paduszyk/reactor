@@ -22,6 +22,7 @@ class Settings(debug.Settings):
         return [
             *super().INSTALLED_APPS,
             "schema_graph",
+            "xlsx_serializer",
         ]
 
     @classmethod
