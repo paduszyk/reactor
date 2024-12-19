@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-18 14:19+0100\n"
+"POT-Creation-Date: 2024-12-19 08:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,3 +22,105 @@ msgstr ""
 
 msgid "Output"
 msgstr "Dorobek"
+
+msgid "title"
+msgstr "tytuł"
+
+msgid "year published"
+msgstr "rok publikacji"
+
+msgid "DOI"
+msgstr "DOI"
+
+msgid "volume"
+msgstr "wolumin/tom"
+
+msgid "issue"
+msgstr "wydanie/numer"
+
+msgid "pagination"
+msgstr "paginacja"
+
+msgid "journal"
+msgstr "czasopismo"
+
+msgid "article"
+msgstr "artykuł"
+
+msgid "articles"
+msgstr "artykuły"
+
+msgid "edited"
+msgstr "edytowana"
+
+msgid "publishing house"
+msgstr "oficyna wydawnicza"
+
+msgid "book"
+msgstr "książka"
+
+msgid "books"
+msgstr "książki"
+
+msgid "chapter"
+msgstr "rozdział"
+
+msgid "chapters"
+msgstr "rozdziały"
+
+msgid "application number"
+msgstr "numer zgłoszenia"
+
+msgid "date applied"
+msgstr "data zgłoszenia"
+
+msgid "patent number"
+msgstr "numer patentu"
+
+msgid "date granted"
+msgstr "data przyznania"
+
+msgid "implemented"
+msgstr "wdrożony"
+
+msgid "patent"
+msgstr "patent"
+
+msgid "patents"
+msgstr "patenty"
+
+msgid "alias"
+msgstr "alias"
+
+msgid "contract"
+msgstr "kontrakt"
+
+msgid "author"
+msgstr "autor"
+
+msgid "authors"
+msgstr "autorzy"
+
+msgid "order"
+msgstr "kolejność"
+
+msgid "discipline"
+msgstr "dyscyplina"
+
+msgid "work type"
+msgstr "typ pracy"
+
+msgid "work ID"
+msgstr "ID pracy"
+
+msgid "unit type"
+msgstr "typ jednostki"
+
+msgid "unit ID"
+msgstr "ID jednostki"
+
+msgid "contribution"
+msgstr "udział"
+
+msgid "contributions"
+msgstr "udziały"

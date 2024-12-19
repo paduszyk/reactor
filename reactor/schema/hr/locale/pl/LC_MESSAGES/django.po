@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-18 14:19+0100\n"
+"POT-Creation-Date: 2024-12-19 08:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,3 +22,63 @@ msgstr ""
 
 msgid "Human Resources"
 msgstr "Kadry"
+
+msgid "last name"
+msgstr "nazwisko"
+
+msgid "given names"
+msgstr "imiona"
+
+msgid "user"
+msgstr "użytkownik"
+
+msgid "degree"
+msgstr "tytuł/stopień"
+
+msgid "person"
+msgstr "osoba"
+
+msgid "persons"
+msgstr "osoby"
+
+msgid "name"
+msgstr "nazwa"
+
+msgid "status"
+msgstr "status"
+
+msgid "statuses"
+msgstr "statusy"
+
+msgid "group"
+msgstr "grupa"
+
+msgid "groups"
+msgstr "grupy"
+
+msgid "subgroup"
+msgstr "podgrupa"
+
+msgid "subgroups"
+msgstr "podgrupy"
+
+msgid "position"
+msgstr "stanowisko"
+
+msgid "positions"
+msgstr "stanowiska"
+
+msgid "disciplines"
+msgstr "dyscypliny"
+
+msgid "unit type"
+msgstr "typ jednostki"
+
+msgid "unit ID"
+msgstr "ID jednostki"
+
+msgid "contract"
+msgstr "kontrakt"
+
+msgid "contracts"
+msgstr "kontrakty"
