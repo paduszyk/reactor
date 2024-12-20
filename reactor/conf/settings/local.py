@@ -65,3 +65,7 @@ class Settings(debug.Settings):
     # Extensions
 
     SHELL_PLUS = "ipython"
+
+    SHELL_PLUS_IMPORTS = [
+        "from django.apps.registry import apps",
+    ]
