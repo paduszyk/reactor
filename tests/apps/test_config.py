@@ -3,6 +3,7 @@ from importlib import import_module
 import appconf
 
 from django.core.checks.registry import registry
+from django.db.models.signals import ModelSignal
 from django.dispatch import Signal
 from django.test.utils import isolate_apps, override_settings
 
@@ -177,6 +178,101 @@ def test_app_config_ready_connects_signals_to_handlers_from_signals_module(mocke
 
     # Clean up.
     signal.disconnect(mock_receiver)
+
+
+@isolate_apps("tests")
+@override_settings(
+    INSTALLED_APPS=[
+        "tests",
+    ],
+)
+def test_app_config_ready_connects_signals_to_model_class_method(mocker):
+    # Arrange.
+    model_signal = ModelSignal()
+
+    class MockModel(Model):
+        signal_receivers = {
+            "receiver": model_signal,
+        }
+
+        @classmethod
+        def receiver(cls, **kwargs):
+            pass
+
+        @classmethod
+        def send_signal(cls):
+            model_signal.send(sender=cls)
+
+    class MockAppConfig(AppConfig):
+        name = "mock_app"
+
+        def __init__(self):
+            pass
+
+        def get_models(self):
+            return [MockModel]
+
+    mock_app_config = MockAppConfig()
+
+    # Spy.
+    spy_receiver = mocker.spy(MockModel, "receiver")
+
+    # Act.
+    mock_app_config.ready()
+    MockModel.send_signal()
+
+    # Assert.
+    spy_receiver.assert_called()
+
+    # Clean up.
+    model_signal.disconnect(dispatch_uid="tests.mockmodel.receiver")
+
+
+@isolate_apps("tests")
+@override_settings(
+    INSTALLED_APPS=[
+        "tests",
+    ],
+)
+def test_app_config_ready_connects_signals_to_model_instance_method(mocker):
+    # Arrange.
+    model_signal = ModelSignal()
+
+    class MockModel(Model):
+        signal_receivers = {
+            "receiver": model_signal,
+        }
+
+        def receiver(self, **kwargs):
+            pass
+
+        def send_signal(self):
+            model_signal.send(sender=self.__class__, instance=self)
+
+    class MockAppConfig(AppConfig):
+        name = "mock_app"
+
+        def __init__(self):
+            pass
+
+        def get_models(self):
+            return [MockModel]
+
+    mock_app_config = MockAppConfig()
+
+    # Spy.
+    spy_receiver = mocker.spy(MockModel, "receiver")
+
+    # Act.
+    mock_app_config.ready()
+    mock_instance = MockModel()
+    mock_instance.send_signal()
+
+    # Assert.
+    spy_receiver.assert_called()
+
+    # Clean up.
+    model_signal.disconnect(dispatch_uid="tests.mockmodel.receiver")
 
 
 @isolate_apps("tests")
