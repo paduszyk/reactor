@@ -16,13 +16,29 @@ class Settings(debug.Settings):
 
         load_dotenv()
 
+    # Security
+
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
+
     # Apps
 
     @property
     def INSTALLED_APPS(self):
         return [
             *super().INSTALLED_APPS,
+            "debug_toolbar",
             "schema_graph",
+        ]
+
+    # Middleware
+
+    @property
+    def MIDDLEWARE(self):
+        return [
+            *super().MIDDLEWARE,
+            "debug_toolbar.middleware.DebugToolbarMiddleware",
         ]
 
     # URLs
@@ -31,10 +47,11 @@ class Settings(debug.Settings):
     def get_urlpatterns(cls):
         from schema_graph.views import Schema
 
-        from django.urls import path
+        from django.urls import include, path
 
         return [
             *super().get_urlpatterns(),
+            path("debug-toolbar/", include("debug_toolbar.urls")),
             path("schema-graph/", Schema.as_view()),
         ]
 
