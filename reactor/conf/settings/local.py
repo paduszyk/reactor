@@ -37,3 +37,9 @@ class Settings(debug.Settings):
             *super().get_urlpatterns(),
             path("schema-graph/", Schema.as_view()),
         ]
+
+    # Serializers
+
+    SERIALIZATION_MODULES = {
+        "xlsx": "xlsx_serializer",
+    }
