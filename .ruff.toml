@@ -1,4 +1,26 @@
 target-version = "py313"
 
 [lint]
+ignore = [
+  "ANN",
+  "D",
+  "RUF012",
+]
 select = ["ALL"]
+
+[lint.per-file-ignores]
+"**/settings*.py" = ["N802"]
+
+[lint.isort]
+known-first-party = ["reactor"]
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "django",
+  "first-party",
+  "local-folder",
+]
+
+[lint.isort.sections]
+django = ["django"]
