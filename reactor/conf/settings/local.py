@@ -29,6 +29,7 @@ class Settings(debug.Settings):
         return [
             *super().INSTALLED_APPS,
             "debug_toolbar",
+            "django_extensions",
             "schema_graph",
         ]
 
@@ -60,3 +61,7 @@ class Settings(debug.Settings):
     SERIALIZATION_MODULES = {
         "xlsx": "xlsx_serializer",
     }
+
+    # Extensions
+
+    SHELL_PLUS = "ipython"
