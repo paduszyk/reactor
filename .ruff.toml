@@ -14,7 +14,7 @@ select = ["ALL"]
 [lint.per-file-ignores]
 "**/__init__.py" = ["F403"]
 "**/settings*.py" = ["N802"]
-"**/test*.py" = ["S101"]
+"**/test*.py" = ["S101", "S311"]
 
 [lint.isort]
 known-first-party = ["reactor"]
