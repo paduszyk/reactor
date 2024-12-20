@@ -4,8 +4,10 @@ import appconf
 
 from django.core.checks.registry import registry
 from django.dispatch import Signal
+from django.test.utils import isolate_apps, override_settings
 
 from reactor.apps.config import AppConfig
+from reactor.db.models import Model
 
 
 def test_app_config_ready_loads_settings_from_conf_module(mocker, settings):
@@ -175,3 +177,37 @@ def test_app_config_ready_connects_signals_to_handlers_from_signals_module(mocke
 
     # Clean up.
     signal.disconnect(mock_receiver)
+
+
+@isolate_apps("tests")
+@override_settings(
+    INSTALLED_APPS=[
+        "tests",
+    ],
+)
+def test_app_config_ready_calls_ready_hook_from_model(mocker):
+    # Arrange.
+    class MockModel(Model):
+        @classmethod
+        def ready(cls):
+            pass
+
+    class MockAppConfig(AppConfig):
+        name = "mock_app"
+
+        def __init__(self):
+            pass
+
+        def get_models(self):
+            return [MockModel]
+
+    mock_app_config = MockAppConfig()
+
+    # Spy.
+    spy_model_ready = mocker.spy(MockModel, "ready")
+
+    # Act.
+    mock_app_config.ready()
+
+    # Assert.
+    spy_model_ready.assert_called()

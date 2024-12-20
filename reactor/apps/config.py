@@ -17,6 +17,7 @@ class AppConfig(apps.AppConfig):
         self._load_conf()
         self._register_checks()
         self._connect_signals()
+        self._models_ready()
 
     def _load_conf(self):
         if not (conf_module := self._import_module("conf")):
@@ -37,6 +38,15 @@ class AppConfig(apps.AppConfig):
 
     def _connect_signals(self):
         self._import_module("signals")
+
+    def _models_ready(self):
+        from reactor.db.models import Model
+
+        models = self.get_models()
+
+        for model in models:
+            if issubclass(model, Model):
+                model.ready()
 
     def _import_module(self, module_name):
         with suppress(ImportError):
