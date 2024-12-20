@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 20:21+0100\n"
+"POT-Creation-Date: 2024-12-20 23:14+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,9 @@ msgstr "rok publikacji"
 msgid "DOI"
 msgstr "DOI"
 
+msgid "and"
+msgstr "i"
+
 msgid "volume"
 msgstr "wolumin/tom"
 
@@ -50,6 +53,18 @@ msgstr "artykuł"
 msgid "articles"
 msgstr "artykuły"
 
+#, python-format
+msgid "vol. %(volume)s"
+msgstr "tom %(volume)s"
+
+#, python-format
+msgid "no. %(issue)s"
+msgstr "nr %(issue)s"
+
+#, python-format
+msgid "pp. %(pagination)s"
+msgstr "str. %(pagination)s"
+
 msgid "edited"
 msgstr "edytowana"
 
@@ -62,11 +77,26 @@ msgstr "książka"
 msgid "books"
 msgstr "książki"
 
+msgid " (Ed.)"
+msgid_plural " (Eds.)"
+msgstr[0] " (red.)"
+msgstr[1] " (red.)"
+msgstr[2] " (red.)"
+msgstr[3] " (red.)"
+
 msgid "chapter"
 msgstr "rozdział"
 
 msgid "chapters"
 msgstr "rozdziały"
+
+#, python-format
+msgid "In: %(book)s"
+msgstr "W: %(book)s"
+
+#, python-format
+msgid "; pp. %(pagination)s"
+msgstr "; str. %(pagination)s"
 
 msgid "application number"
 msgstr "numer zgłoszenia"
@@ -89,6 +119,14 @@ msgstr "patent"
 msgid "patents"
 msgstr "patenty"
 
+#, python-format
+msgid "Applied on %(date_applied)s"
+msgstr "Złożony dn. %(date_applied)s"
+
+#, python-format
+msgid ", granted on %(date_granted)s"
+msgstr ", przyznany dn. %(date_granted)s"
+
 msgid "alias"
 msgstr "alias"
 
@@ -100,6 +138,10 @@ msgstr "autor"
 
 msgid "authors"
 msgstr "autorzy"
+
+#, python-format
+msgid " (%(position_or_status)s at %(unit)s)"
+msgstr " (%(position_or_status)s w %(unit)s)"
 
 msgid "order"
 msgstr "kolejność"
@@ -124,3 +166,7 @@ msgstr "udział"
 
 msgid "contributions"
 msgstr "udziały"
+
+#, python-format
+msgid "%(author)s: author no. %(order)d of %(work_model)s ID = %(work_id)d"
+msgstr "%(author)s: autor nr %(order)d, %(work_model)s ID = %(work_id)d"

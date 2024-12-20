@@ -32,11 +32,39 @@ class Unit(models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return f"{self.get_full_name()} ({self.get_full_abbreviation()})"
+
+    def get_parent(self):
+        return None
+
+    def get_ancestors(self):
+        ancestors = [self]
+
+        while parent := ancestors[-1].get_parent():
+            ancestors.append(parent)
+
+        return ancestors[1:]
+
+    def get_full_name(self):
+        return self._get_full_field("name", sep=", ")
+
+    def get_full_abbreviation(self):
+        return self._get_full_field("abbreviation", sep="/")
+
+    def _get_full_field(self, field_name, *, sep):
+        return sep.join(
+            getattr(ancestor, field_name) for ancestor in [self, *self.get_ancestors()]
+        )
+
 
 class Institution(Unit):
     class Meta:
         verbose_name = _("institution")
         verbose_name_plural = _("institutions")
+
+    def get_parent(self):
+        return None
 
 
 class Institute(Unit):
@@ -51,6 +79,9 @@ class Institute(Unit):
         verbose_name = _("institute")
         verbose_name_plural = _("institutes")
 
+    def get_parent(self):
+        return self.institution
+
 
 class Department(Unit):
     # Relations.
@@ -63,3 +94,6 @@ class Department(Unit):
     class Meta:
         verbose_name = _("department")
         verbose_name_plural = _("departments")
+
+    def get_parent(self):
+        return self.institute
