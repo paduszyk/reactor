@@ -297,6 +297,18 @@ wheels = [
 ]
 
 [[package]]
+name = "model-bakery"
+version = "1.20.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/31/2d/9f61b529c788b367a6bac5b211bf8879036b4bcb27a5e9e78808131ea6fb/model_bakery-1.20.0.tar.gz", hash = "sha256:ec9dc846b9a00b20f92df38fac310263323ab61b59b6eeebf77a4aefb0412724", size = 21016 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/60/f0/c6a6c8ac6fd1dd3c0241ac69230af6592e573d3dedc2ff95b22a352c10f2/model_bakery-1.20.0-py3-none-any.whl", hash = "sha256:875326466f5982ee8f0281abdfa774d78893d5473562575dfd5a9304ac7c5b8c", size = 24019 },
+]
+
+[[package]]
 name = "nodeenv"
 version = "1.9.1"
 source = { registry = "https://pypi.org/simple" }
@@ -528,6 +540,7 @@ dev = [
     { name = "django-schema-graph" },
     { name = "django-xlsx-serializer" },
     { name = "ipython" },
+    { name = "model-bakery" },
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "pytest-cov" },
@@ -553,6 +566,7 @@ dev = [
     { name = "django-schema-graph", specifier = ">=3.1.0" },
     { name = "django-xlsx-serializer", specifier = ">=1.0.1" },
     { name = "ipython", specifier = ">=8.31.0" },
+    { name = "model-bakery", specifier = ">=1.20.0" },
     { name = "pre-commit", specifier = ">=4.0.1" },
     { name = "pytest", specifier = ">=8.3.4" },
     { name = "pytest-cov", specifier = ">=6.0.0" },
