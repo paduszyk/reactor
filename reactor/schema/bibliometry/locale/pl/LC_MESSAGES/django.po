@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 20:18+0100\n"
+"POT-Creation-Date: 2024-12-20 20:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,3 +22,33 @@ msgstr ""
 
 msgid "Bibliometry"
 msgstr "Bibliometria"
+
+msgid "journal"
+msgstr "czasopismo"
+
+msgid "2-year value"
+msgstr "wartość 2-letnia"
+
+msgid "5-year value"
+msgstr "wartość 5-letnia"
+
+msgid "year published"
+msgstr "rok publikacji"
+
+msgid "Impact Factor"
+msgstr "Czynnik wpływu (IF)"
+
+msgid "Impact Factors"
+msgstr "Czynniki wpływu (IF)"
+
+msgid "value"
+msgstr "wartość"
+
+msgid "date published"
+msgstr "data publikacji"
+
+msgid "ministry score"
+msgstr "punktacja MNiSW"
+
+msgid "ministry scores"
+msgstr "punktacje MNiSW"
