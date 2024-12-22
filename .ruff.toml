@@ -3,13 +3,16 @@ target-version = "py313"
 [lint]
 ignore = [
   "ANN",
+  "ARG",
   "D",
   "RUF012",
 ]
 select = ["ALL"]
 
 [lint.per-file-ignores]
+"**/__init__.py" = ["F403"]
 "**/settings*.py" = ["N802"]
+"**/test*.py" = ["S101"]
 
 [lint.isort]
 known-first-party = ["reactor"]
@@ -24,3 +27,6 @@ section-order = [
 
 [lint.isort.sections]
 django = ["django"]
+
+[lint.flake8-self]
+ignore-names = ["_meta"]
