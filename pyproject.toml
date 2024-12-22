@@ -14,6 +14,11 @@ postgres = [
 
 [dependency-groups]
 local = [
+  "django-debug-toolbar>=4.4.6",
+  "django-extensions>=3.2.3",
+  "django-schema-graph>=3.1.0",
+  "django-xlsx-serializer>=1.0.1",
+  "ipython>=8.31.0",
   "pre-commit>=4.0.1",
 ]
 ruff = [
