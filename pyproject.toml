@@ -7,3 +7,6 @@ requires-python = ">=3.13"
 local = [
   "pre-commit>=4.0.1",
 ]
+ruff = [
+  "ruff>=0.8.4",
+]
