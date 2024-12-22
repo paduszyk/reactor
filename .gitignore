@@ -1,4 +1,12 @@
+__pycache__/
 .DS_Store
+.env
 .ruff_cache/
 .venv/
+*.mo
+*.pot
+*.sqlite3
+*.sqlite3-journal
+media/
 node_modules/
+staticfiles/
