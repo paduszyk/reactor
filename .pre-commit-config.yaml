@@ -27,6 +27,16 @@ repos:
         entry: uv run ruff format
         language: system
         pass_filenames: false
+      - id: djlint-lint
+        name: djlint (lint)
+        entry: uv run djlint --lint .
+        language: system
+        pass_filenames: false
+      - id: djlint-reformat
+        name: djlint (reformat)
+        entry: uv run djlint --reformat .
+        language: system
+        pass_filenames: false
       - id: django-check
         name: django (check)
         language: system

@@ -1,0 +1,5 @@
+blank_line_after_tag = "extends,load"
+indent = 2
+max_blank_lines = 1
+profile = "django"
+use_gitignore = true
