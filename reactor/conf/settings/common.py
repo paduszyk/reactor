@@ -38,6 +38,12 @@ class Settings(base.Settings):
         "django.contrib.messages",
         "django.contrib.staticfiles",
         "reactor.core",
+        "reactor.schema.bibliometry",
+        "reactor.schema.evaluation",
+        "reactor.schema.hr",
+        "reactor.schema.output",
+        "reactor.schema.publishers",
+        "reactor.schema.units",
     ]
 
     # Middleware
