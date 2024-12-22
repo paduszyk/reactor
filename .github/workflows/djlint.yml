@@ -1,0 +1,29 @@
+name: djLint
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  djlint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        command:
+          - lint
+          - reformat
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - run: uv sync --only-group djlint --frozen
+      - run: uv run djlint ${{ format('--{0}', matrix.command) }} .
