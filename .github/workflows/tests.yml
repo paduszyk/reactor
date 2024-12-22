@@ -1,0 +1,40 @@
+name: Tests
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        database-engine:
+          - postgres
+          - sqlite
+      fail-fast: false
+    env:
+      DATABASE_ENGINE: ${{ matrix.database-engine }}
+    services:
+      postgres:
+        image: ${{ matrix.database-engine == 'postgres' && 'postgres:latest' || '' }}
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: .python-version
+      - run: uv sync --extra ${{ matrix.database-engine }} --group tests --frozen
+      - run: uv run pytest

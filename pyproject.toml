@@ -25,3 +25,10 @@ ruff = [
   "python-dotenv>=1.0.1",
   "ruff>=0.8.4",
 ]
+tests = [
+  "pytest>=8.3.4",
+  "pytest-custom-exit-code>=0.3.0",
+  "pytest-django>=4.9.0",
+  "pytest-mock>=3.14.0",
+  "pytest-randomly>=3.16.0",
+]
