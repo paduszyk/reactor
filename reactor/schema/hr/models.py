@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
+from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from reactor.db import models
+from reactor.utils.parsers import HumanName
 
 
 class Person(models.Model):
@@ -40,6 +42,16 @@ class Person(models.Model):
         verbose_name = _("person")
         verbose_name_plural = _("persons")
 
+    def __str__(self):
+        return "{}{}".format(
+            self.human_name.full,
+            f", {degree}" if (degree := self.degree) else "",
+        )
+
+    @property
+    def human_name(self):
+        return HumanName(f"{self.last_name}, {self.given_names}")
+
 
 class Status(models.Model):
     # Local fields.
@@ -52,6 +64,9 @@ class Status(models.Model):
         verbose_name = _("status")
         verbose_name_plural = _("statuses")
 
+    def __str__(self):
+        return self.name
+
 
 class Group(models.Model):
     # Local fields.
@@ -63,6 +78,9 @@ class Group(models.Model):
     class Meta:
         verbose_name = _("group")
         verbose_name_plural = _("groups")
+
+    def __str__(self):
+        return self.name
 
 
 class Subgroup(models.Model):
@@ -84,6 +102,12 @@ class Subgroup(models.Model):
     class Meta:
         verbose_name = _("subgroup")
         verbose_name_plural = _("subgroups")
+
+    def __str__(self):
+        return gettext("%(name)s (in group: %(group)s)") % {
+            "name": self.name,
+            "group": self.group.name,
+        }
 
 
 class Position(models.Model):
@@ -107,6 +131,17 @@ class Position(models.Model):
     class Meta:
         verbose_name = _("position")
         verbose_name_plural = _("positions")
+
+    def __str__(self):
+        return (
+            gettext("%(name)s (in subgroup: %(subgroup)s)")
+            % {
+                "name": self.name,
+                "subgroup": subgroup.name,
+            }
+            if (subgroup := self.subgroup)
+            else self.name
+        )
 
 
 class Contract(models.Model):
@@ -160,3 +195,10 @@ class Contract(models.Model):
     class Meta:
         verbose_name = _("contract")
         verbose_name_plural = _("contracts")
+
+    def __str__(self):
+        return gettext("%(person)s (%(position_or_status)s at %(unit)s)") % {
+            "person": self.person.human_name.full_reversed,
+            "position_or_status": (self.position or self.status).name,
+            "unit": self.unit.get_full_abbreviation(),
+        }

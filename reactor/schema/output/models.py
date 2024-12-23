@@ -1,7 +1,10 @@
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.utils.text import capfirst, get_text_list
+from django.utils.translation import gettext, ngettext
 from django.utils.translation import gettext_lazy as _
 
 from reactor.db import models
+from reactor.utils.parsers import HumanName
 
 
 class Work(models.Model):
@@ -32,6 +35,38 @@ class Work(models.Model):
 
     class Meta:
         abstract = True
+
+    def __str__(self):
+        return ": ".join(
+            filter(None, [self.get_authors_str(), self.get_citation_str()]),
+        )
+
+    @property
+    def authors(self):
+        opts = self._meta
+
+        return Author.objects.filter(
+            contribution__work_type__app_label=opts.app_label,
+            contribution__work_type__model=opts.model_name,
+            contribution__work_id=getattr(self, opts.pk.name),
+        ).order_by("contribution__order")
+
+    @staticmethod
+    def get_author_str(author):
+        return author.human_name.short_reversed
+
+    def get_authors_str(self):
+        return (
+            get_text_list(
+                list(map(self.get_author_str, authors)),
+                last_word=gettext("and"),
+            )
+            if (authors := self.authors).exists()
+            else ""
+        )
+
+    def get_citation_str(self):
+        return ""
 
 
 class Article(Work):
@@ -65,6 +100,31 @@ class Article(Work):
         verbose_name = _("article")
         verbose_name_plural = _("articles")
 
+    def get_citation_str(self):
+        parts = filter(
+            None,
+            [
+                f"{self.journal.abbreviation} {self.year_published}",
+                (
+                    gettext("vol. %(volume)s") % {"volume": volume}
+                    if (volume := self.volume)
+                    else ""
+                ),
+                (
+                    gettext("no. %(issue)s") % {"issue": issue}
+                    if (issue := self.issue)
+                    else ""
+                ),
+                (
+                    gettext("pp. %(pagination)s") % {"pagination": pagination}
+                    if (pagination := self.pagination)
+                    else ""
+                ),
+            ],
+        )
+
+        return f"{self.title}. {', '.join(parts)}."
+
 
 class Book(Work):
     # Local fields.
@@ -91,6 +151,15 @@ class Book(Work):
         verbose_name = _("book")
         verbose_name_plural = _("books")
 
+    def get_authors_str(self):
+        return "{}{}".format(
+            super().get_authors_str(),
+            ngettext(" (Ed.)", " (Eds.)", self.authors.count()) if self.edited else "",
+        )
+
+    def get_citation_str(self):
+        return f"{self.title}. {self.publishing_house.name}, {self.year_published}."
+
 
 class Chapter(Work):
     # Local fields.
@@ -115,6 +184,24 @@ class Chapter(Work):
     class Meta:
         verbose_name = _("chapter")
         verbose_name_plural = _("chapters")
+
+    def get_citation_str(self):
+        return "{}. {}{}.".format(
+            self.title,
+            gettext("In: %(book)s") % {"book": self.get_book_str()},
+            (
+                gettext("; pp. %(pagination)s") % {"pagination": pagination}
+                if (pagination := self.pagination)
+                else ""
+            ),
+        )
+
+    def get_book_str(self):
+        book = self.book
+
+        return " / ".join(
+            filter(None, [book.get_citation_str(), book.get_authors_str()]),
+        )
 
 
 class Patent(Work):
@@ -151,6 +238,27 @@ class Patent(Work):
         verbose_name = _("patent")
         verbose_name_plural = _("patents")
 
+    def get_citation_str(self):
+        number_field = self._meta.get_field(
+            "patent_number" if self.patent_number else "application_number",
+        )
+
+        return "{}. {}: {}. {}{}.".format(
+            self.title,
+            capfirst(number_field.verbose_name),
+            getattr(self, number_field.name),
+            (
+                gettext("Applied on %(date_applied)s")
+                % {"date_applied": self.date_applied}
+            ),
+            (
+                gettext(", granted on %(date_granted)s")
+                % {"date_granted": date_granted}
+                if (date_granted := self.date_granted)
+                else ""
+            ),
+        )
+
 
 class Author(models.Model):
     # Local fields.
@@ -174,6 +282,28 @@ class Author(models.Model):
     class Meta:
         verbose_name = _("author")
         verbose_name_plural = _("authors")
+
+    def __str__(self):
+        return "{}{}".format(
+            self.human_name.short_reversed,
+            (
+                gettext(" (%(position_or_status)s at %(unit)s)")
+                % {
+                    "position_or_status": (contract.position or contract.status).name,
+                    "unit": unit.get_full_abbreviation(),
+                }
+                if (contract := self.contract) and (unit := contract.unit)
+                else ""
+            ),
+        )
+
+    @property
+    def human_name(self):
+        return (
+            HumanName(alias)
+            if (alias := self.alias)
+            else self.contract.person.human_name
+        )
 
 
 class Contribution(models.Model):
@@ -233,3 +363,28 @@ class Contribution(models.Model):
     class Meta:
         verbose_name = _("contribution")
         verbose_name_plural = _("contributions")
+
+    def __str__(self):
+        return gettext(
+            "%(author)s: author no. %(order)d of %(work_model)s ID = %(work_id)d",
+        ) % {
+            "author": "{}{}".format(
+                self.author.human_name.short_reversed,
+                (
+                    f" ({unit.get_full_abbreviation()})"
+                    if (unit := self.get_unit())
+                    else ""
+                ),
+            ),
+            "order": self.order,
+            "work_model": self.get_work_model()._meta.verbose_name,
+            "work_id": self.work_id,
+        }
+
+    def get_unit(self):
+        return self.unit or (
+            contract.unit if (contract := self.author.contract) else None
+        )
+
+    def get_work_model(self):
+        return self.work_type.model_class()

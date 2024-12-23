@@ -1,3 +1,4 @@
+from django.utils.translation import gettext
 from django.utils.translation import gettext_lazy as _
 
 from reactor.db import models
@@ -32,6 +33,25 @@ class ImpactFactor(models.Model):
         verbose_name = _("Impact Factor")
         verbose_name_plural = _("Impact Factors")
 
+    def get_journal_str(self):
+        publishing_house = (journal := self.journal).publishing_house
+
+        return (
+            f"{journal.abbreviation} "
+            f"({publishing_house.abbreviation or publishing_house.name})"
+        )
+
+    def __str__(self):
+        return gettext(
+            "IF[%(journal)s; %(year_published)d] = "
+            "%(value_2_year).3f (2-year) / %(value_5_year).3f (5-year)",
+        ) % {
+            "journal": self.get_journal_str(),
+            "year_published": self.year_published,
+            "value_2_year": self.value_2_year,
+            "value_5_year": self.value_5_year,
+        }
+
 
 class MinistryScore(models.Model):
     # Local fields.
@@ -54,3 +74,18 @@ class MinistryScore(models.Model):
     class Meta:
         verbose_name = _("ministry score")
         verbose_name_plural = _("ministry scores")
+
+    def get_journal_str(self):
+        publishing_house = (journal := self.journal).publishing_house
+
+        return (
+            f"{journal.abbreviation} "
+            f"({publishing_house.abbreviation or publishing_house.name})"
+        )
+
+    def __str__(self):
+        return gettext("MS[%(journal)s; %(date_published)s] = %(value)d") % {
+            "journal": self.get_journal_str(),
+            "date_published": self.date_published,
+            "value": self.value,
+        }

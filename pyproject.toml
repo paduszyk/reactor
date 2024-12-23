@@ -31,6 +31,7 @@ ruff = [
   "ruff>=0.8.4",
 ]
 tests = [
+  "model-bakery>=1.20.0",
   "pytest>=8.3.4",
   "pytest-cov>=6.0.0",
   "pytest-custom-exit-code>=0.3.0",
