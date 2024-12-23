@@ -192,6 +192,18 @@ wheels = [
 ]
 
 [[package]]
+name = "django-modeltranslation"
+version = "0.19.11"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6c/9f/90b9e3aa5236a5073d18f0513fa5c566ecafdbad221463cd596cf9877092/django_modeltranslation-0.19.11.tar.gz", hash = "sha256:c65a2652554c22bbe11f5db2e81e0c66d58434077d31dce7089cc7bd3ce4e79c", size = 108667 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/14/f8/d22817e97c185e11db6f3814d9574aec398e83c097387f712a9067cfe4ce/django_modeltranslation-0.19.11-py3-none-any.whl", hash = "sha256:fe36ecb8d943aaa406e4045d34e2160e90b170b0c71c8d0b5336e5031030b202", size = 53394 },
+]
+
+[[package]]
 name = "django-schema-graph"
 version = "3.1.0"
 source = { registry = "https://pypi.org/simple" }
@@ -637,6 +649,7 @@ dependencies = [
     { name = "dj-database-url" },
     { name = "django" },
     { name = "django-appconf" },
+    { name = "django-modeltranslation" },
 ]
 
 [package.optional-dependencies]
@@ -674,6 +687,7 @@ requires-dist = [
     { name = "dj-database-url", specifier = ">=2.3.0" },
     { name = "django", specifier = ">=5.1.4" },
     { name = "django-appconf", specifier = ">=1.0.6" },
+    { name = "django-modeltranslation", specifier = ">=0.19.11" },
     { name = "psycopg", extras = ["binary"], marker = "extra == 'postgres'", specifier = ">=3.2.3" },
 ]
 
