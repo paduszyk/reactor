@@ -37,6 +37,7 @@ class Settings(base.Settings):
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
+        "modeltranslation",
         "reactor.core",
         "reactor.schema.bibliometry",
         "reactor.schema.evaluation",
