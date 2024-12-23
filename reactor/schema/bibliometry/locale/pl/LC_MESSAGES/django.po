@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-22 23:06+0100\n"
+"POT-Creation-Date: 2024-12-23 09:22+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,6 +41,14 @@ msgstr "Czynnik wpływu (IF)"
 msgid "Impact Factors"
 msgstr "Czynniki wpływu (IF)"
 
+#, python-format
+msgid ""
+"IF[%(journal)s; %(year_published)d] = %(value_2_year).3f (2-year) / "
+"%(value_5_year).3f (5-year)"
+msgstr ""
+"IF[%(journal)s; %(year_published)d] = %(value_2_year).3f (2-letni) / "
+"%(value_5_year).3f (5-letni)"
+
 msgid "value"
 msgstr "wartość"
 
@@ -52,3 +60,7 @@ msgstr "punktacja MNiSW"
 
 msgid "ministry scores"
 msgstr "punktacje MNiSW"
+
+#, python-format
+msgid "MS[%(journal)s; %(date_published)s] = %(value)d"
+msgstr "MNiSW[%(journal)s; %(date_published)s] = %(value)d"

@@ -19,6 +19,12 @@ class PublishingHouse(models.Model):
         verbose_name = _("publishing house")
         verbose_name_plural = _("publishing houses")
 
+    def __str__(self):
+        return "{}{}".format(
+            self.name,
+            f" ({abbreviation})" if (abbreviation := self.abbreviation) else "",
+        )
+
 
 class Journal(models.Model):
     # Local fields.
@@ -60,3 +66,11 @@ class Journal(models.Model):
     class Meta:
         verbose_name = _("journal")
         verbose_name_plural = _("journals")
+
+    def __str__(self):
+        return f"{self.title} ({self.get_publishing_house_str()})"
+
+    def get_publishing_house_str(self):
+        publishing_house = self.publishing_house
+
+        return publishing_house.abbreviation or publishing_house.name
