@@ -27,3 +27,13 @@ repos:
         entry: uv run ruff format
         language: system
         pass_filenames: false
+      - id: django-check
+        name: django (check)
+        language: system
+        entry: uv run manage.py check
+        pass_filenames: false
+      - id: django-makemigrations
+        name: django (makemigrations)
+        language: system
+        entry: uv run manage.py makemigrations --check
+        pass_filenames: false
