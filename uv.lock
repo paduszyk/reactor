@@ -142,6 +142,15 @@ wheels = [
 ]
 
 [[package]]
+name = "lefthook"
+version = "1.11.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/55/d5/3fcdcaf392fa454ae2b0642a3cb63fc0cbc709f7f173fb7799e468c4b0c8/lefthook-1.11.0.tar.gz", hash = "sha256:cabbcb196d17eb035c22ba2634aabcbd501a79f7361476672b27a297181b7962", size = 46553059 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/86/65/fc9dabbda739e5967cdbd03095be9c165107854df67c1481c365d1209ba0/lefthook-1.11.0-py3-none-any.whl", hash = "sha256:1a25cfc9258ddb6bbd378730e8d8d0acd154465b5fb5dcc3d096d255f300f5e7", size = 46771177 },
+]
+
+[[package]]
 name = "pathspec"
 version = "0.12.1"
 source = { registry = "https://pypi.org/simple" }
@@ -232,6 +241,7 @@ djlint = [
 ]
 local = [
     { name = "django-debug-toolbar" },
+    { name = "lefthook" },
 ]
 ruff = [
     { name = "ruff" },
@@ -248,7 +258,10 @@ provides-extras = ["sqlite", "postgres"]
 
 [package.metadata.requires-dev]
 djlint = [{ name = "djlint", specifier = ">=1.36.4" }]
-local = [{ name = "django-debug-toolbar", specifier = ">=5.0.1" }]
+local = [
+    { name = "django-debug-toolbar", specifier = ">=5.0.1" },
+    { name = "lefthook", specifier = ">=1.11.0" },
+]
 ruff = [{ name = "ruff", specifier = ">=0.9.7" }]
 
 [[package]]

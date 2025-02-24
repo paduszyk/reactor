@@ -20,6 +20,7 @@ djlint = [
 ]
 local = [
   "django-debug-toolbar>=5.0.1",
+  "lefthook>=1.11.0",
 ]
 ruff = [
   "ruff>=0.9.7",
