@@ -12,6 +12,7 @@ ignore = [
 
 [lint.per-file-ignores]
 "**/conf*.py" = ["N802"]
+"tests/**/*.py" = ["S101"]
 
 [lint.isort]
 section-order = [
@@ -20,8 +21,10 @@ section-order = [
   "third-party",
   "django",
   "first-party",
+  "tests",
   "local-folder",
 ]
 
 [lint.isort.sections]
 django = ["django"]
+tests = ["tests"]
