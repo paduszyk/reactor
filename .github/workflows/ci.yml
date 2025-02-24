@@ -46,3 +46,34 @@ jobs:
           uv run ruff ${{ matrix.command }}
           ${{ matrix.command == 'check' && '--output-format github' || '' }}
           ${{ matrix.command == 'format' && '--diff' || '' }}
+  django:
+    needs:
+      - uv
+    strategy:
+      matrix:
+        database-engine:
+          - sqlite
+          - postgres
+      fail-fast: false
+    services:
+      postgres:
+        image: ${{ matrix.database-engine == 'postgres' && 'postgres:latest' || '' }}
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - run: uv sync --extra ${{ matrix.database-engine }} --frozen
+      - run: |
+          uv run manage.py check
+          uv run manage.py makemigrations --check
+          uv run manage.py migrate --no-input
+        env:
+          DATABASE_ENGINE: ${{ matrix.database-engine }}
