@@ -1,0 +1,22 @@
+pre-commit:
+  commands:
+    prettier:
+      run: npx prettier --check .
+    uv:
+      run: uv lock --check
+    ruff-check:
+      run: uv run ruff check .
+    ruff-format:
+      run: uv run ruff format --diff .
+    djlint-lint:
+      run: uv run djlint --lint --check .
+    djlint-reformat:
+      run: uv run djlint --reformat --check .
+    django-check:
+      run: uv run manage.py check
+    django-makemigrations:
+      run: uv run manage.py makemigrations --check
+
+output:
+  - meta
+  - summary
