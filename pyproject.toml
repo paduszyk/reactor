@@ -5,7 +5,9 @@ requires-python = ">=3.13"
 dependencies = [
   "dj-database-url>=2.3.0",
   "django>=5.1.6",
+  "gunicorn>=23.0.0",
   "python-decouple>=3.8",
+  "whitenoise>=6.9.0",
 ]
 
 [project.optional-dependencies]
