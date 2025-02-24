@@ -26,3 +26,23 @@ jobs:
         with:
           enable-cache: true
       - run: uv lock --check
+  ruff:
+    needs:
+      - uv
+    strategy:
+      matrix:
+        command:
+          - check
+          - format
+      fail-fast: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - run: uv sync --group ruff --frozen
+      - run: >-
+          uv run ruff ${{ matrix.command }}
+          ${{ matrix.command == 'check' && '--output-format github' || '' }}
+          ${{ matrix.command == 'format' && '--diff' || '' }}
