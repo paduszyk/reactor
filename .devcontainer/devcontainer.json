@@ -1,0 +1,23 @@
+{
+  "overrideCommand": true,
+  "shutdownAction": "stopCompose",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "${containerWorkspaceFolder}/.venv/bin/python",
+        "python.terminal.activateEnvironment": true
+      },
+      "extensions": ["ms-python.python"]
+    }
+  },
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "uv",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "updateContentCommand": ".devcontainer/scripts/update-content.sh",
+  "postCreateCommand": ".devcontainer/scripts/post-create.sh"
+}
