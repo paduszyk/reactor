@@ -40,6 +40,51 @@ class DotenvMixin(SettingsMixin):
         Env.read_env(cls.env_file, overwrite=False)
 
 
+class DebugToolbarMixin(SettingsMixin):
+    @classmethod
+    def is_active(cls):
+        try:
+            import debug_toolbar  # noqa: F401
+        except ModuleNotFoundError:
+            return False
+        return True
+
+    # Security
+
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
+
+    # Apps
+
+    @property
+    def INSTALLED_APPS(self):  # noqa: N802
+        return [
+            *super().INSTALLED_APPS,
+            "debug_toolbar",
+        ]
+
+    # Middleware
+
+    @property
+    def MIDDLEWARE(self):  # noqa: N802
+        return [
+            *super().MIDDLEWARE,
+            "debug_toolbar.middleware.DebugToolbarMiddleware",
+        ]
+
+    # URLs
+
+    @classmethod
+    def get_urlpatterns(cls):
+        from debug_toolbar.toolbar import debug_toolbar_urls
+
+        return [
+            *super().get_urlpatterns(),
+            *debug_toolbar_urls(),
+        ]
+
+
 for settings_mixin in SettingsMixin.__subclasses__():
     if settings_mixin.is_active():
         Settings = type("Settings", (settings_mixin, Settings), {})
