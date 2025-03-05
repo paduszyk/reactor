@@ -9,6 +9,9 @@ dependencies = [
 ]
 
 [dependency-groups]
+debug = [
+  "django-debug-toolbar>=5.0.1",
+]
 ruff = [
   "ruff>=0.9.9",
 ]
