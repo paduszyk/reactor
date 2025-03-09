@@ -1,0 +1,46 @@
+default_stages:
+  - pre-commit
+
+repos:
+  - repo: local
+    hooks:
+      - id: prettier
+        name: prettier
+        entry: npx prettier --check .
+        language: system
+        pass_filenames: false
+      - id: uv
+        name: uv
+        entry: uv lock --check
+        language: system
+        pass_filenames: false
+      - id: ruff-check
+        name: ruff-check
+        entry: uv run ruff check
+        language: system
+        pass_filenames: false
+      - id: ruff-format
+        name: ruff-format
+        entry: uv run ruff format
+        language: system
+        pass_filenames: false
+      - id: djlint-lint
+        name: djlint-lint
+        entry: uv run djlint --lint .
+        language: system
+        pass_filenames: false
+      - id: djlint-reformat
+        name: djlint-reformat
+        entry: uv run djlint --reformat .
+        language: system
+        pass_filenames: false
+      - id: django-check
+        name: django-check
+        entry: uv run manage.py check
+        language: system
+        pass_filenames: false
+      - id: django-makemigrations
+        name: django-makemigrations
+        entry: uv run manage.py makemigrations --check
+        language: system
+        pass_filenames: false
