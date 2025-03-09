@@ -1,9 +1,20 @@
 default_stages:
   - pre-commit
 
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+
 repos:
   - repo: local
     hooks:
+      - id: commitlint
+        name: commitlint
+        entry: npx commitlint --edit
+        language: system
+        pass_filenames: false
+        stages:
+          - commit-msg
       - id: prettier
         name: prettier
         entry: npx prettier --check .
