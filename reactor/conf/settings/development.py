@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from importlib import import_module
 
 from environs import env
 
@@ -26,6 +27,52 @@ class EnvironMixin(SettingsMixin):
     @classmethod
     def is_active(cls):
         return env.read_env()
+
+
+class DebugToolbarMixin(SettingsMixin):
+    @classmethod
+    def is_active(cls):
+        try:
+            import_module("debug_toolbar")
+        except ImportError:
+            return False
+
+        return True
+
+    # Security
+
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
+
+    # Apps
+
+    @property
+    def INSTALLED_APPS(self):  # noqa: N802
+        return [
+            *super().INSTALLED_APPS,
+            "debug_toolbar",
+        ]
+
+    # Middleware
+
+    @property
+    def MIDDLEWARE(self):  # noqa: N802
+        return [
+            *super().MIDDLEWARE,
+            "debug_toolbar.middleware.DebugToolbarMiddleware",
+        ]
+
+    # URLs
+
+    @classmethod
+    def get_urlpatterns(cls):
+        from django.urls import include, path
+
+        return [
+            *super().get_urlpatterns(),
+            path("__debug__/", include("debug_toolbar.urls")),
+        ]
 
 
 for settings_mixin in SettingsMixin.__subclasses__():
