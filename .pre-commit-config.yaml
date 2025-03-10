@@ -1,0 +1,79 @@
+default_install_hook_types:
+  - pre-commit
+  - commit-msg
+
+repos:
+  - repo: local
+    hooks:
+      - id: commitlint
+        name: "Commitlint"
+        entry: |
+          npx commitlint --edit
+        language: system
+        pass_filenames: false
+        stages:
+          - commit-msg
+      - id: prettier
+        name: "Prettier"
+        entry: |
+          npx prettier --check .
+        language: system
+        pass_filenames: false
+        stages:
+          - pre-commit
+      - id: uv
+        name: "uv.lock check"
+        entry: |
+          uv lock --check
+        language: system
+        pass_filenames: false
+        stages:
+          - pre-commit
+      - id: ruff-check
+        name: "Ruff (linter)"
+        entry: |
+          uv run ruff check
+        language: system
+        pass_filenames: false
+        stages:
+          - pre-commit
+      - id: ruff-format
+        name: "Ruff (formatter)"
+        entry: |
+          uv run ruff format
+        language: system
+        pass_filenames: false
+        stages:
+          - pre-commit
+      - id: djlint-lint
+        name: "djLint (linter)"
+        entry: |
+          uv run djlint --lint .
+        language: system
+        pass_filenames: false
+        stages:
+          - pre-commit
+      - id: djlint-reformat
+        name: "djLint (formatter)"
+        entry: |
+          uv run djlint --reformat .
+        language: system
+        pass_filenames: false
+        stages:
+          - pre-commit
+      - id: django-check
+        name: "Django (system check)"
+        entry: |
+          uv run manage.py check
+        language: system
+        pass_filenames: false
+        stages:
+          - pre-commit
+      - id: django-makemigrations
+        name: "Django (migrations check)"
+        entry: |
+          uv run manage.py makemigrations --check
+        language: system
+        pass_filenames: false
+        stages:
+          - pre-commit
