@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Django: Development server",
+      "type": "debugpy",
+      "request": "launch",
+      "args": ["runserver"],
+      "django": true,
+      "program": "${workspaceFolder}/manage.py"
+    },
+    {
+      "name": "Django: Python shell",
+      "type": "debugpy",
+      "request": "launch",
+      "args": ["shell"],
+      "django": true,
+      "program": "${workspaceFolder}/manage.py"
+    }
+  ]
+}
