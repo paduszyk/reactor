@@ -84,3 +84,41 @@ jobs:
       - name: Run Ruff
         run: |
           uv run ruff ${{ matrix.args }}
+  django:
+    needs:
+      - uv
+    strategy:
+      matrix:
+        include:
+          - name: System check
+            args: check
+          - name: Migrations
+            args: makemigrations --check
+          - name: Translations
+            args: makemessages --all --no-location --no-obsolete
+      fail-fast: false
+    name: "Django: ${{ matrix.name }}"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Install gettext
+        if: ${{ matrix.name == 'Translations' }}
+        run: |
+          sudo apt-get install gettext
+      - name: Install dependencies
+        run: |
+          uv sync --frozen
+      - name: Run Django
+        run: |
+          uv run python -m django ${{ matrix.args }}
+        env:
+          DJANGO_SETTINGS_MODULE: reactor.conf.settings.dev
+      - name: Check for changes
+        if: ${{ matrix.name == 'Translations' }}
+        run: |
+          git add . && git diff --exit-code
