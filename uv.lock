@@ -180,6 +180,15 @@ wheels = [
 ]
 
 [[package]]
+name = "lefthook"
+version = "1.11.5"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/94/6c/13e8afa15856a2a6622d752cc4b69dee7bff1459c3e9f39aba4b883905cd/lefthook-1.11.5.tar.gz", hash = "sha256:e9ea344bbe70e09406565d5e77e9557c97cf1ec23003ae6e2c7a4502698de7c7", size = 48746070 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/58/74/d7b2543aa54fe0921c9fdf168a3250b3d2b4e64d2dd981efb974ebd3667b/lefthook-1.11.5-py3-none-any.whl", hash = "sha256:f073842e73d3ee0f453a841590e12f7b0b298efc0ccb7285b6ee250bc37780bd", size = 48978033 },
+]
+
+[[package]]
 name = "model-bakery"
 version = "1.20.4"
 source = { registry = "https://pypi.org/simple" }
@@ -384,6 +393,7 @@ djlint = [
 ]
 local = [
     { name = "django-debug-toolbar" },
+    { name = "lefthook" },
 ]
 ruff = [
     { name = "ruff" },
@@ -409,7 +419,10 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 djlint = [{ name = "djlint", specifier = ">=1.36.4" }]
-local = [{ name = "django-debug-toolbar", specifier = ">=5.1.0" }]
+local = [
+    { name = "django-debug-toolbar", specifier = ">=5.1.0" },
+    { name = "lefthook", specifier = ">=1.11.5" },
+]
 ruff = [{ name = "ruff", specifier = ">=0.11.2" }]
 tests = [
     { name = "model-bakery", specifier = ">=1.20.4" },
