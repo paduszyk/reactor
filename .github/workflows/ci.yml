@@ -45,3 +45,16 @@ jobs:
       - name: Run Prettier
         run: |
           npx prettier --check .
+  uv:
+    name: uv.lock check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Check uv.lock
+        run: |
+          uv lock --check
