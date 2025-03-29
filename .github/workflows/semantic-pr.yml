@@ -1,0 +1,21 @@
+name: Semantic PR
+
+on:
+  pull_request_target:
+    types:
+      - edited
+      - opened
+      - synchronize
+
+permissions:
+  pull-requests: read
+
+jobs:
+  semantic-pr:
+    name: Semantic PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title
+        uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
