@@ -6,6 +6,16 @@ ignore = [
 ]
 select = ["ALL"]
 
+[lint.per-file-ignores]
+"tests/*.py" = [
+  "ARG",
+  "E501",
+  "FBT",
+  "PLR2004",
+  "S101",
+  "S311",
+]
+
 [lint.isort]
 section-order = [
   "future",
@@ -13,8 +23,10 @@ section-order = [
   "third-party",
   "django",
   "first-party",
+  "tests",
   "local-folder",
 ]
 
 [lint.isort.sections]
 django = ["django"]
+tests = ["tests"]

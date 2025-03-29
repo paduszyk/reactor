@@ -148,3 +148,41 @@ jobs:
         if: ${{ matrix.name == 'Translations' }}
         run: |
           git add . && git diff --exit-code
+  tests:
+    needs:
+      - django
+    strategy:
+      matrix:
+        include:
+          - name: PostgreSQL
+            database-url: "postgres://postgres:postgres@localhost:5432/postgres"
+          - name: SQLite3
+            database-url: "sqlite://:memory:"
+      fail-fast: false
+    name: "Tests: ${{ matrix.name }}"
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: ${{ startsWith(matrix.database-url, 'postgres') && 'postgres:17' || '' }}
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Install dependencies
+        run: |
+          uv sync --group tests --frozen
+      - name: Run tests
+        run: |
+          uv run pytest
+        env:
+          DJANGO_SETTINGS_MODULE: reactor.conf.settings.dev
+          DJANGO_DATABASE_URL: ${{ matrix.database-url }}
