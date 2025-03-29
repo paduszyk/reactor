@@ -84,6 +84,32 @@ jobs:
       - name: Run Ruff
         run: |
           uv run ruff ${{ matrix.args }}
+  djlint:
+    needs:
+      - uv
+    strategy:
+      matrix:
+        include:
+          - name: Linter
+            args: --lint --check .
+          - name: Formatter
+            args: --reformat --check .
+      fail-fast: false
+    name: "djLint: ${{ matrix.name }}"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+      - name: Install djLint
+        run: |
+          uv sync --only-group djlint --frozen
+      - name: Run djLint
+        run: |
+          uv run djlint ${{ matrix.args }}
   django:
     needs:
       - uv
