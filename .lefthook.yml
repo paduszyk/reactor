@@ -1,0 +1,39 @@
+commit-msg:
+  jobs:
+    - name: "Commitlint"
+      run: |
+        npx commitlint --edit {1}
+
+pre-commit:
+  jobs:
+    - name: "Prettier"
+      run: |
+        npx prettier --check .
+    - name: "uv: Lockfile check"
+      run: |
+        uv lock --check
+    - name: "Ruff: Linter"
+      run: |
+        uv run ruff check
+    - name: "Ruff: Formatter"
+      run: |
+        uv run ruff format --diff
+    - name: "djLint: Linter"
+      run: |
+        uv run djlint --lint --check .
+    - name: "djLint: Formatter"
+      run: |
+        uv run djlint --reformat --check .
+    - name: "Django: System check"
+      run: |
+        uv run manage.py check
+    - name: "Django: Migrations"
+      run: |
+        uv run manage.py makemigrations --check
+    - name: "Django: Translations"
+      run: |
+        uv run manage.py makemessages --all --no-location --no-obsolete
+
+output:
+  - meta
+  - summary
