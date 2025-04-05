@@ -23,6 +23,52 @@ class SettingsMixin(ABC):
         pass
 
 
+class DebugToolbarMixin(SettingsMixin):
+    @classmethod
+    def is_active(cls):
+        try:
+            import debug_toolbar  # noqa: F401
+        except ModuleNotFoundError:
+            return False
+        else:
+            return True
+
+    # Security
+
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
+
+    # Apps
+
+    @property
+    def INSTALLED_APPS(self):  # noqa: N802
+        return [
+            *super().INSTALLED_APPS,
+            "debug_toolbar",
+        ]
+
+    # Middleware
+
+    @property
+    def MIDDLEWARE(self):  # noqa: N802
+        return [
+            *super().MIDDLEWARE,
+            "debug_toolbar.middleware.DebugToolbarMiddleware",
+        ]
+
+    # URLs
+
+    @classmethod
+    def get_urlpatterns(cls):
+        from django.urls import include, path
+
+        return [
+            *super().get_urlpatterns(),
+            path("__debug__/", include("debug_toolbar.urls")),
+        ]
+
+
 def apply_settings_mixin(base, mixin):
     if mixin.is_active():
 
