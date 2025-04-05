@@ -1,0 +1,29 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "django (check)",
+      "type": "debugpy",
+      "request": "launch",
+      "args": ["check", "--fail-level", "ERROR"],
+      "django": true,
+      "program": "${workspaceFolder}/manage.py"
+    },
+    {
+      "name": "django (runserver)",
+      "type": "debugpy",
+      "request": "launch",
+      "args": ["runserver"],
+      "django": true,
+      "program": "${workspaceFolder}/manage.py"
+    },
+    {
+      "name": "django (shell)",
+      "type": "debugpy",
+      "request": "launch",
+      "args": ["shell"],
+      "django": true,
+      "program": "${workspaceFolder}/manage.py"
+    }
+  ]
+}
