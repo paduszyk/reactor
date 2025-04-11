@@ -1,0 +1,36 @@
+commit-msg:
+  jobs:
+    - name: Commit message
+      run: |
+        [[ "$(head -n1 "{1}")" =~ ^[A-Z].*\.$ ]] || exit 1
+
+pre-commit:
+  jobs:
+    - name: Prettier
+      run: |
+        npx prettier --write .
+    - name: Ruff
+      group:
+        jobs:
+          - name: Lint
+            run: |
+              uv run ruff check
+          - name: Format
+            run: |
+              uv run ruff format
+    - name: Django
+      group:
+        jobs:
+          - name: Run system checks
+            run: |
+              uv run manage.py check
+          - name: Check migrations
+            run: |
+              uv run manage.py makemigrations --check
+          - name: Check translations
+            run: |
+              uv run manage.py makemessages --all --no-location --no-obsolete
+
+output:
+  - meta
+  - summary
