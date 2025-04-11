@@ -9,6 +9,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+  "django-schema-graph>=3.1.0",
   "model-bakery>=1.20.4",
   "pytest-cov>=6.1.1",
   "pytest-django>=4.11.1",
