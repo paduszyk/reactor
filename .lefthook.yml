@@ -9,6 +9,9 @@ pre-commit:
     - name: Prettier
       run: |
         npx prettier --write .
+    - name: uv.lock check
+      run: |
+        uv lock --check
     - name: Ruff
       group:
         jobs:
