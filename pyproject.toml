@@ -15,6 +15,7 @@ dev = [
   "django-schema-graph>=3.1.0",
   "django-xlsx-serializer>=1.1.0",
   "model-bakery>=1.20.4",
+  "nox>=2025.2.9",
   "pytest>=8.3.5",
   "pytest-cov>=6.1.1",
   "pytest-custom-exit-code>=0.3.0",
