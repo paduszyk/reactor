@@ -1,3 +1,8 @@
+__pycache__/
+.env
 .ruff_cache/
 .venv/
+*.mo
+*.sqlite3
 node_modules/
+staticfiles/
