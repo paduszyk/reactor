@@ -1,0 +1,57 @@
+commit-msg:
+  jobs:
+    - name: Commitlint
+      run: |
+        npx commitlint --edit {1}
+
+pre-commit:
+  jobs:
+    - name: Prettier
+      run: |
+        npx prettier --check .
+    - name: uv.lock check
+      run: |
+        uv lock --check
+    - name: Ruff
+      group:
+        jobs:
+          - name: Lint
+            run: |
+              uv run ruff check
+          - name: Format
+            run: |
+              uv run ruff format --diff
+    - name: djLint
+      group:
+        jobs:
+          - name: Lint
+            run: |
+              uv run djlint --lint --check .
+          - name: Format
+            run: |
+              uv run djlint --reformat --check .
+    - name: Django
+      group:
+        jobs:
+          - name: Run system checks
+            run: |
+              uv run manage.py check
+          - name: Check migrations
+            run: |
+              uv run manage.py makemigrations --check
+          - name: Check translations
+            run: |
+              uv run manage.py makemessages --all --no-location --no-obsolete
+
+pre-push:
+  jobs:
+    - name: Tests
+      run: |
+        uv run nox -k Tests
+      env:
+        NOX_PYTEST_ARGS: -q --no-cov
+        NOX_SILENT: true
+
+output:
+  - meta
+  - summary
