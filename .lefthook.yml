@@ -1,5 +1,8 @@
 pre-commit:
   jobs:
+    - name: Prettier
+      run: |
+        npx prettier --check .
 
 output:
   - meta
