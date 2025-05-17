@@ -1,6 +1,8 @@
 import inspect
+import os
 import sys
 from collections import UserList
+from functools import wraps
 
 
 def _is_setting_name(name):
@@ -42,6 +44,8 @@ class BaseSettings:
 
 class PluginRegistry(UserList):
     class Plugin:
+        disabled_in_tests = False
+
         @classmethod
         def is_active(cls):
             return False
@@ -54,6 +58,18 @@ class PluginRegistry(UserList):
             )
 
             raise TypeError(msg)
+
+        if plugin.disabled_in_tests:
+            is_active = plugin.is_active
+
+            @wraps(is_active)
+            def wrapper(cls, *args, **kwargs):  # noqa: ARG001
+                if ("test" in sys.argv) or ("PYTEST_VERSION" in os.environ):
+                    return False
+
+                return is_active(*args, **kwargs)
+
+            plugin.is_active = classmethod(wrapper)
 
         self.append(plugin)
 

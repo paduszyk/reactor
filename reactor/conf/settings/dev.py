@@ -26,6 +26,8 @@ class DotenvPlugin(plugins.Plugin):
 
 @plugins.register
 class DebugToolbarPlugin(plugins.Plugin):
+    disabled_in_tests = True
+
     @classmethod
     def is_active(cls):
         try:
