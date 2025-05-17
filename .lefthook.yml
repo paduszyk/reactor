@@ -6,6 +6,15 @@ pre-commit:
     - name: uv.lock
       run: |
         uv lock --check
+    - name: Ruff
+      group:
+        jobs:
+          - name: Lint
+            run: |
+              uv run ruff check
+          - name: Format
+            run: |
+              uv run ruff format --diff
 
 output:
   - meta
