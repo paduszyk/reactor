@@ -1,3 +1,5 @@
+from importlib import import_module
+
 from environs import env
 
 from reactor.conf.settings import build_settings, plugins
@@ -20,6 +22,53 @@ class DotenvPlugin(plugins.Plugin):
     # Paths
 
     DOTENV_FILE = CommonSettings.BASE_DIR / ".env"
+
+
+@plugins.register
+class DebugToolbarPlugin(plugins.Plugin):
+    @classmethod
+    def is_active(cls):
+        try:
+            import_module("debug_toolbar")
+        except ModuleNotFoundError:
+            return False
+
+        return env.bool("DJANGO_DEBUG_TOOLBAR", default=True)
+
+    # Security
+
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
+
+    # Apps
+
+    @property
+    def INSTALLED_APPS(self):
+        return [
+            *super().INSTALLED_APPS,
+            "debug_toolbar",
+        ]
+
+    # Middleware
+
+    @property
+    def MIDDLEWARE(self):
+        return [
+            *super().MIDDLEWARE,
+            "debug_toolbar.middleware.DebugToolbarMiddleware",
+        ]
+
+    # URLs
+
+    @classmethod
+    def get_urlpatterns(cls):
+        from django.urls import include, path
+
+        return [
+            *super().get_urlpatterns(),
+            path("__debug__/", include("debug_toolbar.urls")),
+        ]
 
 
 class DevSettings(CommonSettings):
