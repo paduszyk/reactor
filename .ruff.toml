@@ -1,2 +1,20 @@
 [lint]
+ignore = [
+  "ANN",
+  "D",
+  "RUF012",
+]
 select = ["ALL"]
+
+[lint.isort]
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "django",
+  "first-party",
+  "local-folder",
+]
+
+[lint.isort.sections]
+django = ["django"]
