@@ -38,3 +38,29 @@ jobs:
       - name: Check uv.lock
         run: |
           uv lock --check
+  ruff:
+    needs:
+      - uv
+    strategy:
+      matrix:
+        include:
+          - name: linter
+            args: check --diff --output-format=github
+          - name: formatter
+            args: format --diff
+      fail-fast: false
+    name: Ruff (${{ matrix.name }})
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install Ruff
+        run: |
+          uv sync --only-group=ruff --frozen
+      - name: Run Ruff
+        run: |
+          uv run ruff ${{ matrix.args }} .
