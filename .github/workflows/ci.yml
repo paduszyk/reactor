@@ -108,3 +108,33 @@ jobs:
         run: |
           uv run python -m django makemessages --all --no-location --no-obsolete
           git add . && git diff --cached --exit-code **/locale/**/*.po
+  tests:
+    needs:
+      - django
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+    env:
+      DJANGO_SETTINGS_MODULE: reactor.conf.settings.dev
+      DJANGO_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install dependencies
+        run: |
+          uv sync --group=tests --frozen
+      - name: Run tests
+        run: |
+          uv run pytest
