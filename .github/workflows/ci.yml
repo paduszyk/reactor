@@ -64,3 +64,47 @@ jobs:
       - name: Run Ruff
         run: |
           uv run ruff ${{ matrix.args }} .
+  django:
+    needs:
+      - uv
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+    env:
+      DJANGO_SETTINGS_MODULE: reactor.conf.settings.dev
+      DJANGO_DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres
+    name: Django
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - name: Install Django and dependencies
+        run: |
+          uv sync --frozen
+      - name: Install gettext
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gettext
+      - name: Run system checks
+        run: |
+          uv run python -m django check --fail-level=ERROR
+      - name: Check migrations
+        run: |
+          uv run python -m django makemigrations --check
+      - name: Apply migrations
+        run: |
+          uv run python -m django migrate --no-input
+      - name: Check translations
+        run: |
+          uv run python -m django makemessages --all --no-location --no-obsolete
+          git add . && git diff --cached --exit-code **/locale/**/*.po
