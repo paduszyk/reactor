@@ -1,0 +1,40 @@
+{
+  "overrideCommand": true,
+  "shutdownAction": "stopCompose",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "alexcvzz.vscode-sqlite",
+        "batisteo.vscode-django",
+        "Cardinal90.multi-cursor-case-preserve",
+        "charliermarsh.ruff",
+        "ckolkman.vscode-postgres",
+        "ecmel.vscode-html-css",
+        "EditorConfig.EditorConfig",
+        "esbenp.prettier-vscode",
+        "mhutchie.git-graph",
+        "mikestead.dotenv",
+        "monosans.djlint",
+        "mrorz.language-gettext",
+        "ms-python.python",
+        "redhat.vscode-yaml",
+        "streetsidesoftware.code-spell-checker-polish",
+        "streetsidesoftware.code-spell-checker",
+        "tamasfe.even-better-toml"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "${localWorkspaceFolder}/.venv/bin/python"
+      }
+    }
+  },
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "uv",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "updateContentCommand": ".devcontainer/update-content.sh",
+  "postCreateCommand": ".devcontainer/post-create.sh"
+}
