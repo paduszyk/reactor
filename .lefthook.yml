@@ -1,0 +1,12 @@
+pre-commit:
+  commands:
+    lint:
+      run: uv run nox -t lint
+    format:
+      run: uv run nox -t format
+    django:
+      run: uv run nox -s django
+
+output:
+  - meta
+  - summary

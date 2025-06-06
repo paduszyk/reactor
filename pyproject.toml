@@ -12,6 +12,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+  "lefthook>=1.11.13",
   "nox>=2025.5.1",
 ]
 djlint = [
