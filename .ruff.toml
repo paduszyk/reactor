@@ -6,6 +6,15 @@ ignore = [
   "RUF012",
 ]
 
+[lint.per-file-ignores]
+"tests/**/*.py" = [  # astral-sh/ruff#4368
+  "ARG",
+  "E501",
+  "FBT",
+  "PLR2004",
+  "S101",
+]
+
 [lint.isort]
 section-order = [
   "future",
