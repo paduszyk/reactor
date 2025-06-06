@@ -11,6 +11,9 @@ dependencies = [
 ]
 
 [dependency-groups]
+dev = [
+  "nox>=2025.5.1",
+]
 djlint = [
   "djlint>=1.36.4",
 ]
