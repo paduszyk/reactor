@@ -1,0 +1,43 @@
+pre-commit:
+  jobs:
+    - name: Prettier
+      run: |
+        npx prettier --check .
+    - name: uv
+      run: |
+        uv lock --check
+    - name: Ruff
+      group:
+        jobs:
+          - name: Linter
+            run: |
+              uv run ruff check
+          - name: Formatter
+            run: |
+              uv run ruff format --diff
+    - name: djLint
+      group:
+        jobs:
+          - name: Linter
+            run: |
+              uv run djlint --lint --check .
+          - name: Formatter
+            run: |
+              uv run djlint --reformat --check .
+    - name: Django
+      group:
+        jobs:
+          - name: System check
+            run: |
+              uv run manage.py check
+          - name: Migrations
+            run: |
+              uv run manage.py makemigrations --check
+          - name: Translations
+            run: |
+              uv run manage.py makemessages --all --no-location
+              git diff --exit-code "*.po"
+
+output:
+  - meta
+  - summary
