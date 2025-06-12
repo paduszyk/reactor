@@ -7,6 +7,9 @@ ignore = [
 ]
 
 [lint.per-file-ignores]
+"reactor/**/__init__.py" = [
+  "F403",
+]
 "tests/**/*.py" = [  # astral-sh/ruff#4368
   "ARG",
   "E501",
