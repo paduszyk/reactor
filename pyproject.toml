@@ -11,6 +11,9 @@ dependencies = [
 ]
 
 [dependency-groups]
+djlint = [
+  "djlint~=1.36",
+]
 ruff = [
   "ruff~=0.12.0",
 ]

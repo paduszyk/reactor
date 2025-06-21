@@ -8,6 +8,10 @@ pre-commit:
       run: uv run ruff check --output-format=full .
     - name: ruff (formatter)
       run: uv run ruff format --diff .
+    - name: djlint (linter)
+      run: uv run djlint --lint --check .
+    - name: djlint (formatter)
+      run: uv run djlint --reformat --check .
     - name: django (system check)
       run: uv run python manage.py check --fail-level=ERROR
     - name: django (migrations)

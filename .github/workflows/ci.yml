@@ -43,6 +43,26 @@ jobs:
           enable-cache: true
       - run: uv sync --only-group=ruff --frozen
       - run: uv run ruff ${{ matrix.args }} .
+  djlint:
+    needs:
+      - uv
+    strategy:
+      matrix:
+        include:
+          - name: linter
+            args: --lint --check
+          - name: formatter
+            args: --reformat --check
+      fail-fast: false
+    name: djlint (${{ matrix.name }})
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --only-group=djlint --frozen
+      - run: uv run djlint ${{ matrix.args }} .
   django:
     needs:
       - uv
