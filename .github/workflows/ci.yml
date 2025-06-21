@@ -71,3 +71,34 @@ jobs:
           DJANGO_SETTINGS_MODULE: reactor.conf.settings.dev
       - if: ${{ matrix.name == 'translations' }}
         run: git diff --exit-code "*.po"
+  pytest:
+    needs:
+      - django
+    strategy:
+      matrix:
+        include:
+          - name: sqlite3
+            database-url: sqlite:///db.sqlite3
+          - name: postgres
+            database-url: postgres://postgres:postgres@localhost:5432/postgres
+      fail-fast: false
+    name: pytest (${{ matrix.name }})
+    services:
+      postgres:
+        image: ${{ matrix.name == 'postgres' && 'postgres:17' || '' }}
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --group=tests --frozen
+      - run: uv run pytest
+        env:
+          DJANGO_DATABASE_URL: ${{ matrix.database-url }}
