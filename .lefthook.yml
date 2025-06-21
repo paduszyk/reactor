@@ -4,6 +4,10 @@ pre-commit:
       run: npx prettier --check .
     - name: uv
       run: uv lock --check
+    - name: ruff (linter)
+      run: uv run ruff check --output-format=full .
+    - name: ruff (formatter)
+      run: uv run ruff format --diff .
 
 output:
   - meta
