@@ -8,6 +8,12 @@ pre-commit:
       run: uv run ruff check --output-format=full .
     - name: ruff (formatter)
       run: uv run ruff format --diff .
+    - name: django (system check)
+      run: uv run python manage.py check --fail-level=ERROR
+    - name: django (migrations)
+      run: uv run python manage.py makemigrations --check
+    - name: django (translations)
+      run: uv run python manage.py makemessages --all --no-location && git diff --exit-code "*.po"
 
 output:
   - meta

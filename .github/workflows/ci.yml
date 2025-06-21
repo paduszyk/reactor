@@ -43,3 +43,31 @@ jobs:
           enable-cache: true
       - run: uv sync --only-group=ruff --frozen
       - run: uv run ruff ${{ matrix.args }} .
+  django:
+    needs:
+      - uv
+    strategy:
+      matrix:
+        include:
+          - name: system check
+            args: check --fail-level=ERROR
+          - name: migrations
+            args: makemigrations --check
+          - name: translations
+            args: makemessages --all --no-location && git diff --exit-code "*.po"
+      fail-fast: false
+    name: django (${{ matrix.name }})
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --frozen
+      - if: ${{ matrix.name == 'translations' }}
+        run: sudo apt-get update && sudo apt-get install --yes gettext
+      - run: uv run python -m django ${{ matrix.args }}
+        env:
+          DJANGO_SETTINGS_MODULE: reactor.conf.settings.dev
+      - if: ${{ matrix.name == 'translations' }}
+        run: git diff --exit-code "*.po"
