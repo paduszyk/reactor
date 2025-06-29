@@ -2,6 +2,13 @@
 name = "reactor"
 version = "1.0-alpha.0"
 requires-python = "~=3.13.5"
+dependencies = [
+  "dj-database-url~=3.0",
+  "django~=5.2",
+  "pillow~=11.2",
+  "psycopg[binary]~=3.2",
+  "python-decouple~=3.8",
+]
 
 [dependency-groups]
 ruff = [
