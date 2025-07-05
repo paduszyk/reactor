@@ -2,8 +2,6 @@ version: 2
 
 updates:
   - package-ecosystem: uv
-    allow:
-      - dependency-type: all
     versioning-strategy: lockfile-only
     directory: "/"
     schedule:
