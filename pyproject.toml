@@ -14,5 +14,6 @@ dependencies = [
 dev = [
   "django-debug-toolbar~=5.2",
   "django-schema-graph~=3.1",
+  "djlint~=1.36",
   "ruff~=0.12.2",
 ]
