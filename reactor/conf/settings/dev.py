@@ -1,3 +1,5 @@
+import functools
+import os
 from importlib import import_module
 
 from decouple import config
@@ -6,6 +8,23 @@ from .base import Plugin
 from .common import Settings as Common
 
 
+def _is_running_tests():
+    return "PYTEST_VERSION" in os.environ
+
+
+def inactive_on_tests(plugin):
+    is_active = plugin.is_active
+
+    @functools.wraps(is_active)
+    def wrapper(*args, **kwargs):
+        return not _is_running_tests() and is_active(*args, **kwargs)
+
+    plugin.is_active = wrapper
+
+    return plugin
+
+
+@inactive_on_tests
 class DebugToolbarPlugin(Plugin):
     @classmethod
     def is_active(cls):
