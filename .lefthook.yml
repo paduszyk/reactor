@@ -15,6 +15,19 @@ pre-commit:
           - name: format
             run: |
               uv run ruff format --diff .
+    - name: django
+      group:
+        jobs:
+          - name: check
+            run: |
+              uv run python manage.py check --fail-level=ERROR
+          - name: makemigrations
+            run: |
+              uv run python manage.py makemigrations --check
+          - name: makemessages
+            run: |
+              uv run python manage.py makemessages --all --no-location
+              git diff --exit-code "*.po"
 
 output:
   - meta
