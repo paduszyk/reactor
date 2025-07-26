@@ -24,3 +24,10 @@ django = ["django"]
 "reactor/conf/settings/**/*.py" = [
   "N802",
 ]
+"tests/**/*.py" = [  # astral-sh/ruff#4368
+  "ARG",
+  "E501",
+  "FBT",
+  "PLR2004",
+  "S101",
+]
