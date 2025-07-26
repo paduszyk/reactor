@@ -11,6 +11,9 @@ dependencies = [
 ]
 
 [dependency-groups]
+djlint = [
+  "djlint~=1.36.4",
+]
 local = [
   "django-debug-toolbar~=5.2.0",
 ]
