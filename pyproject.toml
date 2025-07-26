@@ -16,6 +16,7 @@ djlint = [
 ]
 local = [
   "django-debug-toolbar~=5.2.0",
+  "nox~=2025.5.1",
 ]
 pytest = [
   "model-bakery~=1.20.5",
