@@ -1,0 +1,7 @@
+line-length = 88
+
+[lint]
+ignore = [
+  "E501",
+]
+select = ["ALL"]
