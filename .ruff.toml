@@ -2,6 +2,28 @@ line-length = 88
 
 [lint]
 ignore = [
+  "ANN",
+  "D",
   "E501",
+  "PLC0415",
+  "RUF012",
 ]
 select = ["ALL"]
+
+[lint.isort]
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "django",
+  "first-party",
+  "local-folder",
+]
+
+[lint.isort.sections]
+django = ["django"]
+
+[lint.per-file-ignores]
+"reactor/conf/settings/*.py" = [
+  "N802",
+]

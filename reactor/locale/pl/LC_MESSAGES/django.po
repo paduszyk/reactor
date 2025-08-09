@@ -1,0 +1,7 @@
+msgctxt "language"
+msgid "English"
+msgstr "angielski"
+
+msgctxt "language"
+msgid "Polish"
+msgstr "polski"
