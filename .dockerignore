@@ -1,0 +1,4 @@
+**/__pycache__/
+**/*.mo
+**/*.pot
+reactor/conf/settings/dev.py
