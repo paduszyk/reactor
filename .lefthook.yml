@@ -15,6 +15,15 @@ pre-commit:
           - name: format
             run: |
               uv run ruff format --diff .
+    - name: djlint
+      group:
+        jobs:
+          - name: lint
+            run: |
+              uv run djlint --lint --check .
+          - name: reformat
+            run: |
+              uv run djlint --reformat --check .
     - name: django
       group:
         jobs:
