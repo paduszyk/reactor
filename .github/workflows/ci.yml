@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v4
+        with:
+          cache: npm
+      - id: version
+        run: |
+          echo "version=$(jq -r '.packages["node_modules/prettier"].version' package-lock.json)" >> $GITHUB_OUTPUT
+      - run: |
+          npm install --no-save prettier@${{ steps.version.outputs.version }}
+      - run: |
+          npx prettier --check .
