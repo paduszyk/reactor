@@ -1,0 +1,8 @@
+[project]
+name = "reactor"
+version = "1-alpha.0"
+requires-python = "~=3.13.7"
+
+[tool.uv]
+required-version = "~=0.8.13"
+default-groups = []
