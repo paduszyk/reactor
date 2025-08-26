@@ -3,6 +3,11 @@ name = "reactor"
 version = "1-alpha.0"
 requires-python = "~=3.13.7"
 
+[dependency-groups]
+ruff = [
+  "ruff~=0.12.10",
+]
+
 [tool.uv]
 required-version = "~=0.8.13"
 default-groups = []

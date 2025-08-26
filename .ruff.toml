@@ -1,0 +1,8 @@
+[lint]
+ignore = [
+  "D1",
+]
+select = ["ALL"]
+
+[lint.pydocstyle]
+convention = "google"
