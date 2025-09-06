@@ -3,6 +3,13 @@ pre-commit:
     - name: prettier
       run: npx --no-install prettier --check .
 
+commit-msg:
+  only:
+    - ref: main
+  jobs:
+    - name: commitlint
+      run: npx --no-install commitlint --edit {1}
+
 output:
   - meta
   - summary
