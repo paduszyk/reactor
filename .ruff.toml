@@ -4,6 +4,14 @@ ignore = [
 ]
 select = ["ALL"]
 
+[lint.per-file-ignores]
+"tests/**/*.py" = [
+  "ARG",
+  "E501",
+  "PLR2004",
+  "S101",
+]
+
 [lint.isort]
 section-order = [
   "future",
