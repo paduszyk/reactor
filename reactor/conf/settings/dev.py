@@ -1,3 +1,5 @@
+import functools
+import os
 from importlib import import_module
 
 from environs import env
@@ -6,6 +8,28 @@ from .base import BasePlugin
 from .common import CommonSettings
 
 
+class PytestPlugin(BasePlugin):
+    @classmethod
+    def is_active(cls):
+        return "PYTEST_VERSION" in os.environ
+
+
+def inactive_in_pytest(plugin):
+    is_active = plugin.is_active
+
+    @functools.wraps(is_active)
+    def wrapper(cls, *args, **kwargs):  # noqa: ARG001
+        if PytestPlugin.is_active():
+            return False
+
+        return is_active(*args, **kwargs)
+
+    plugin.is_active = classmethod(wrapper)
+
+    return plugin
+
+
+@inactive_in_pytest
 class DebugToolbarPlugin(BasePlugin):
     @classmethod
     def is_active(cls):
