@@ -11,5 +11,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+  "django-debug-toolbar>=6.0.0,<7",
   "ruff>=0.13.0,<0.14",
 ]
