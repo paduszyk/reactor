@@ -1,6 +1,7 @@
 __pycache__/
 .coverage
 .env
+.nox/
 .pytest_cache/
 .ruff_cache/
 .venv/
