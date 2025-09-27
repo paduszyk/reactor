@@ -4,6 +4,13 @@ pre-commit:
       run: npx --no-install prettier --check .
     - name: uv
       run: uv lock --check
+    - name: ruff
+      group:
+        jobs:
+          - name: check
+            run: uv run --locked ruff check .
+          - name: format
+            run: uv run --locked ruff format --diff .
 
 output:
   - meta
