@@ -11,6 +11,17 @@ pre-commit:
             run: uv run --locked ruff check .
           - name: format
             run: uv run --locked ruff format --diff .
+    - name: django
+      group:
+        jobs:
+          - name: check
+            run: uv run --locked python manage.py check
+          - name: makemigrations
+            run: uv run --locked python manage.py makemigrations --check
+          - name: makemessages
+            run: |
+              uv run --locked python manage.py makemessages --all --no-location --no-obsolete
+              git diff --exit-code ":(glob)**/*.po"
 
 output:
   - meta
