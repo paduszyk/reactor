@@ -1,0 +1,41 @@
+pre-commit:
+  jobs:
+    - name: prettier
+      run: npx --no-install prettier --check .
+    - name: uv
+      run: uv lock --check
+    - name: ruff
+      env:
+        UV_LOCKED: "true"
+      group:
+        jobs:
+          - name: check
+            run: uv run ruff check .
+          - name: format
+            run: uv run ruff format --diff .
+    - name: djlint
+      env:
+        UV_LOCKED: "true"
+      group:
+        jobs:
+          - name: lint
+            run: uv run djlint --lint --check .
+          - name: reformat
+            run: uv run djlint --reformat --check .
+    - name: django
+      env:
+        UV_LOCKED: "true"
+      group:
+        jobs:
+          - name: check
+            run: uv run python manage.py check --fail-level=ERROR
+          - name: makemigrations
+            run: uv run python manage.py makemigrations --check
+          - name: makemessages
+            run: |
+              uv run python manage.py makemessages --all --no-location --no-obsolete
+              git diff --exit-code ":(glob)**/*.po"
+
+output:
+  - meta
+  - summary

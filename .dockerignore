@@ -1,0 +1,3 @@
+**/__pycache__/
+**/*.mo
+reactor/conf/settings/dev.py
