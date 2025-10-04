@@ -1,5 +1,7 @@
 pre-commit:
   jobs:
+    - name: prettier
+      run: npx --no-install prettier --check .
 
 output:
   - meta
