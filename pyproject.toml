@@ -13,6 +13,9 @@ dependencies = [
 dev = [
   "django-debug-toolbar>=6.0.0,<7",
 ]
+djlint = [
+  "djlint>=1.36.4,<2",
+]
 ruff = [
   "ruff>=0.13.3,<0.14",
 ]
