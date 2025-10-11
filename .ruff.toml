@@ -11,6 +11,12 @@ select = ["ALL"]
 "reactor/conf/settings/*.py" = [
   "N802",
 ]
+"tests/**/*.py" = [
+  "ARG",
+  "E501",
+  "PLR2004",
+  "S101",
+]
 
 [lint.isort]
 section-order = [

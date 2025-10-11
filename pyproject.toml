@@ -16,6 +16,16 @@ dev = [
 djlint = [
   "djlint>=1.36.4,<2",
 ]
+pytest = [
+  "model-bakery>=1.20.5,<2",
+  "pytest>=8.4.2,<9",
+  "pytest-cov>=7.0.0,<8",
+  "pytest-custom-exit-code>=0.3.0,<0.4",
+  "pytest-django>=4.11.1,<5",
+  "pytest-env>=1.1.5,<2",
+  "pytest-mock>=3.15.1,<4",
+  "pytest-randomly>=4.0.1,<5",
+]
 ruff = [
   "ruff>=0.14.0,<0.15",
 ]
