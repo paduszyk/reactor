@@ -1,3 +1,5 @@
+from importlib import import_module
+
 from environs import env
 
 from .base import BasePlugin
@@ -8,6 +10,49 @@ class DotenvPlugin(BasePlugin):
     @classmethod
     def is_active(cls):
         return env.read_env()
+
+
+class DebugToolbarPlugin(BasePlugin):
+    @classmethod
+    def is_active(cls):
+        try:
+            import_module("debug_toolbar")
+        except ModuleNotFoundError:
+            return False
+
+        return env.bool("DJANGO_DEBUG_TOOLBAR", default=True)
+
+    # Security
+
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
+
+    # Apps
+
+    @property
+    def INSTALLED_APPS(self):
+        return [
+            *super().INSTALLED_APPS,
+            "debug_toolbar",
+        ]
+
+    # Middleware
+
+    @property
+    def MIDDLEWARE(self):
+        return [
+            *super().MIDDLEWARE,
+            "debug_toolbar.middleware.DebugToolbarMiddleware",
+        ]
+
+    # URLs
+
+    @classmethod
+    def get_urlpatterns(cls):
+        from debug_toolbar.toolbar import debug_toolbar_urls
+
+        return super().get_urlpatterns() + debug_toolbar_urls()
 
 
 class DevSettings(CommonSettings):
