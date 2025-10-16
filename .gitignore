@@ -1,4 +1,10 @@
+__pycache__/
+.env
 .lefthook-local.yml
 .ruff_cache/
 .venv/
+*.mo
+*.sqlite3
+media/
 node_modules/
+staticfiles/
