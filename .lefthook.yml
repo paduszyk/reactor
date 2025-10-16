@@ -13,6 +13,15 @@ pre-commit:
             run: uv run ruff check .
           - name: format
             run: uv run ruff format --diff .
+    - name: djlint
+      env:
+        UV_LOCKED: "true"
+      group:
+        jobs:
+          - name: lint
+            run: uv run djlint --lint --check .
+          - name: reformat
+            run: uv run djlint --reformat --check .
     - name: django
       env:
         UV_LOCKED: "true"
