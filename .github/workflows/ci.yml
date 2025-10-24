@@ -121,6 +121,21 @@ jobs:
         with:
           enable-cache: true
       - run: uv sync --no-dev --group=pytest --frozen
-      - run: uv run --no-sync pytest
+      - run: uv run --no-sync pytest --cov --cov-report=xml:coverage.xml
         env:
           DJANGO_DATABASE_URL: ${{ matrix.database-url }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.name }}
+          path: ./coverage.xml
+          if-no-files-found: error
+  codecov:
+    needs:
+      - pytest
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v5
+      - uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
