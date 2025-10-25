@@ -9,6 +9,10 @@ ignore = [
 select = ["ALL"]
 
 [lint.per-file-ignores]
+"**/__init__.py" = [
+  "F401",
+  "F403",
+]
 "reactor/conf/settings/*.py" = [
   "N802",
 ]
@@ -31,3 +35,8 @@ section-order = [
 
 [lint.isort.sections]
 django = ["django"]
+
+[lint.flake8-self]
+extend-ignore-names = [
+  "_meta",
+]
