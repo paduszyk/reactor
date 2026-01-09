@@ -14,6 +14,7 @@ dependencies = [
 dev = [
   { include-group = "debug" },
   { include-group = "djlint" },
+  { include-group = "nox" },
   { include-group = "pytest" },
   { include-group = "ruff" },
 ]
@@ -22,6 +23,9 @@ debug = [
 ]
 djlint = [
   "djlint>=1.36.4,<2",
+]
+nox = [
+  "nox==2025.11.12",
 ]
 pytest = [
   "model-bakery>=1.21.0,<2",
