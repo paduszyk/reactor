@@ -1,3 +1,4 @@
 .lefthook-local.yml
+.ruff_cache/
 .venv/
 node_modules/

@@ -12,3 +12,14 @@ pre-commit:
         - ".python-version"
         - "pyproject.toml"
         - "uv.lock"
+    - name: ruff
+      env:
+        UV_NO_SYNC: "true"
+      group:
+        jobs:
+          - name: check
+            run: uv run ruff check {staged_files}
+          - name: format
+            run: uv run ruff format --diff {staged_files}
+      glob:
+        - "*.py"
