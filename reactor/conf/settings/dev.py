@@ -1,3 +1,5 @@
+import functools
+import os
 from importlib import import_module
 
 import decouple
@@ -8,6 +10,26 @@ from .base import BasePlugin
 from .common import CommonSettings
 
 
+def _is_pytest_running():
+    return "PYTEST_VERSION" in os.environ
+
+
+def disable_when_pytest_is_running(plugin):
+    is_active = plugin.is_active
+
+    @functools.wraps(is_active)
+    def wrapper(cls, *args, **kwargs):  # noqa: ARG001
+        if _is_pytest_running():
+            return False
+
+        return is_active(*args, **kwargs)
+
+    plugin.is_active = classmethod(wrapper)
+
+    return plugin
+
+
+@disable_when_pytest_is_running
 class DebugToolbarPlugin(BasePlugin):
     @classmethod
     def is_active(cls):

@@ -1,0 +1,9 @@
+[run]
+branch = True
+source =
+  reactor/
+
+[report]
+show_missing = True
+skip_covered = True
+skip_empty = True

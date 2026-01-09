@@ -1,0 +1,19 @@
+[pytest]
+env = [
+  "DJANGO_SETTINGS_MODULE=reactor.conf.settings.dev",
+]
+addopts = [
+  "--suppress-no-test-exit-code",
+]
+python_files = [
+  "test_*.py",
+]
+python_classes = [
+  "Test*",
+]
+python_functions = [
+  "test_*",
+]
+testpaths = [
+  "tests/",
+]

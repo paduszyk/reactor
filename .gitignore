@@ -1,6 +1,8 @@
 __pycache__/
+.coverage
 .env
 .lefthook-local.yml
+.pytest_cache/
 .ruff_cache/
 .venv/
 *.mo
