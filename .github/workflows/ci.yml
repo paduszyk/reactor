@@ -1,0 +1,124 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  prettier:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm clean-install
+      - run: npx --no-install prettier --check .
+  uv:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+      - run: uv lock --check
+  ruff:
+    needs:
+      - uv
+    strategy:
+      matrix:
+        include:
+          - name: check
+            args: check --output-format=github
+          - name: format
+            args: format --diff --output-format=github
+      fail-fast: false
+    name: ruff (${{ matrix.name }})
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync --only-group=ruff --frozen
+      - run: uv run ruff ${{ matrix.args }} .
+        env:
+          UV_NO_SYNC: true
+  djlint:
+    needs:
+      - uv
+    strategy:
+      matrix:
+        include:
+          - name: lint
+            args: --lint --check
+          - name: reformat
+            args: --reformat --check
+      fail-fast: false
+    name: djlint (${{ matrix.name }})
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync --only-group=djlint --frozen
+      - run: uv run djlint ${{ matrix.args }} .
+        env:
+          UV_NO_SYNC: true
+  django:
+    needs:
+      - uv
+    strategy:
+      matrix:
+        include:
+          - name: check
+            args: check --fail-level=ERROR
+          - name: makemigrations
+            args: makemigrations --check
+          - name: makemessages
+            args: makemessages --all --no-location --no-obsolete
+      fail-fast: false
+    name: django (${{ matrix.name }})
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - if: ${{ matrix.name == 'makemessages' }}
+        run: sudo apt-get update && sudo apt-get install --yes gettext
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync --frozen
+      - run: uv run python manage.py ${{ matrix.args }}
+        env:
+          DJANGO_SETTINGS_MODULE: reactor.conf.settings.dev
+          UV_NO_SYNC: true
+      - if: ${{ matrix.name == 'makemessages' }}
+        run: git diff --exit-code ":(glob)**/*.po"
+  pytest:
+    needs:
+      - django
+    strategy:
+      matrix:
+        include:
+          - name: sqlite
+            database_url: sqlite:///db.sqlite3
+          - name: postgres
+            database_url: postgres://postgres:postgres@localhost:5432/postgres
+      fail-fast: false
+    services:
+      postgres:
+        image: ${{ matrix.name == 'postgres' && 'postgres:17' || '' }}
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+    name: pytest (${{ matrix.name }})
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync --group=pytest --frozen
+      - run: uv run pytest
+        env:
+          DJANGO_DATABASE_URL: ${{ matrix.database_url }}
+          UV_NO_SYNC: true
