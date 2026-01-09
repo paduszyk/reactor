@@ -23,3 +23,22 @@ pre-commit:
             run: uv run ruff format --diff {staged_files}
       glob:
         - "*.py"
+    - name: django
+      env:
+        DJANGO_SETTINGS_MODULE: "reactor.conf.settings.dev"
+        UV_NO_SYNC: "true"
+      group:
+        jobs:
+          - name: check
+            run: uv run python -m django check --fail-level=ERROR
+          - name: makemigrations
+            run: uv run python -m django makemigrations --check
+          - name: makemessages
+            run: |
+              uv run python -m django makemessages --all --no-location --no-obsolete
+              git diff --exit-code ":(glob)**/*.po"
+      glob:
+        - ".python-version"
+        - "pyproject.toml"
+        - "reactor/**/*.py"
+        - "uv.lock"
