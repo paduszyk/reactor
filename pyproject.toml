@@ -13,10 +13,14 @@ dependencies = [
 [dependency-groups]
 dev = [
   { include-group = "debug" },
+  { include-group = "djlint" },
   { include-group = "ruff" },
 ]
 debug = [
   "django-debug-toolbar>=6.1.0,<7",
+]
+djlint = [
+  "djlint>=1.36.4,<2",
 ]
 ruff = [
   "ruff>=0.14.11,<0.15",

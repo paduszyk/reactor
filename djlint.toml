@@ -1,0 +1,13 @@
+profile = "django"
+use_gitignore = true
+indent = 2
+max_blank_lines = 1
+blank_line_after_tag = "extends, load"
+format_css = true
+format_js = true
+
+[css]
+indent_size = 2
+
+[js]
+indent_size = 2

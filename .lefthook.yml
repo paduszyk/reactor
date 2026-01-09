@@ -23,6 +23,17 @@ pre-commit:
             run: uv run ruff format --diff {staged_files}
       glob:
         - "*.py"
+    - name: djlint
+      env:
+        UV_NO_SYNC: "true"
+      group:
+        jobs:
+          - name: lint
+            run: uv run djlint --lint --check {staged_files}
+          - name: reformat
+            run: uv run djlint --reformat --check {staged_files}
+      glob:
+        - "reactor/**/templates/**/*.html"
     - name: django
       env:
         DJANGO_SETTINGS_MODULE: "reactor.conf.settings.dev"
