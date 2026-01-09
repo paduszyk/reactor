@@ -6,3 +6,9 @@ pre-commit:
         - "*.json"
         - "*.md"
         - "*.yml"
+    - name: uv
+      run: uv lock --check
+      glob:
+        - ".python-version"
+        - "pyproject.toml"
+        - "uv.lock"
