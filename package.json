@@ -1,5 +1,6 @@
 {
   "devDependencies": {
-    "lefthook": "^2.0.13"
+    "lefthook": "^2.0.13",
+    "prettier": "^3.7.4"
   }
 }
