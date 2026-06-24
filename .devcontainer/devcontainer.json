@@ -1,0 +1,13 @@
+{
+  "overrideCommand": true,
+  "shutdownAction": "stopCompose",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/node:2": {}
+  },
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "uv",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "updateContentCommand": ".devcontainer/update_content.sh",
+  "postCreateCommand": ".devcontainer/post_create.sh"
+}
