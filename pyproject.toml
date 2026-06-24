@@ -13,7 +13,11 @@ debug = [
 ]
 dev = [
   { include-group = "debug" },
+  { include-group = "djlint" },
   { include-group = "ruff" },
+]
+djlint = [
+  "djlint>=1.39.4,<2.0.0",
 ]
 ruff = [
   "ruff>=0.15.19,<0.16.0",
