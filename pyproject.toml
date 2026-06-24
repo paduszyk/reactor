@@ -14,11 +14,16 @@ debug = [
 dev = [
   { include-group = "debug" },
   { include-group = "djlint" },
+  { include-group = "nox" },
   { include-group = "pytest" },
   { include-group = "ruff" },
 ]
 djlint = [
   "djlint>=1.39.4,<2.0.0",
+]
+nox = [
+  "nox==2026.4.10",
+  "nox-uv>=0.8.0,<0.9.0",
 ]
 pytest = [
   "model-bakery>=1.24.0,<2.0.0",
