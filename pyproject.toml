@@ -8,7 +8,11 @@ dependencies = [
 ]
 
 [dependency-groups]
+debug = [
+  "django-debug-toolbar>=6.3.0,<7.0.0",
+]
 dev = [
+  { include-group = "debug" },
   { include-group = "ruff" },
 ]
 ruff = [
