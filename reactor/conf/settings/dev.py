@@ -1,3 +1,5 @@
+import functools
+import os
 from importlib import import_module
 
 from environs import EnvError, env
@@ -8,6 +10,26 @@ from .common import CommonSettings
 env.read_env()
 
 
+def _is_pytest_running():
+    return "PYTEST_VERSION" in os.environ
+
+
+def disable_when_pytest_is_running(extension):
+    original_is_enabled = extension.is_enabled
+
+    @functools.wraps(original_is_enabled)
+    def wrapper(cls, *args, **kwargs):  # noqa: ARG001
+        if _is_pytest_running():
+            return False
+
+        return original_is_enabled(*args, **kwargs)
+
+    extension.is_enabled = classmethod(wrapper)
+
+    return extension
+
+
+@disable_when_pytest_is_running
 class DebugToolbarExtension(BaseExtension):
     @classmethod
     def is_enabled(cls):

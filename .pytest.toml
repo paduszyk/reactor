@@ -1,0 +1,7 @@
+[pytest]
+env = [
+  "D:DJANGO_SETTINGS_MODULE=reactor.conf.settings.dev",
+]
+testpaths = [
+  "tests/",
+]

@@ -15,6 +15,11 @@ ignore = [
 "reactor/conf/settings/**/*.py" = [
   "N802",
 ]
+"tests/**/*.py" = [
+  "ARG",
+  "E501",
+  "S101",
+]
 
 [lint.isort]
 section-order = [
