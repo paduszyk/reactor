@@ -4,6 +4,13 @@ pre-commit:
   jobs:
     - name: prettier
       run: npx --no-install prettier --check .
+    - name: uv
+      group:
+        jobs:
+          - name: sync
+            run: uv sync --check
+          - name: lock
+            run: uv lock --check
 
 commit-msg:
   jobs:
