@@ -1,0 +1,18 @@
+version = "0.2"
+language = "en"
+useGitignore = true
+import = [
+  "@cspell/dict-pl_pl/cspell-ext.json",
+]
+dictionaries = [
+  "project-words",
+]
+
+[[overrides]]
+filename = "**/locale/pl/**/*.po"
+language = "en,pl"
+
+[[dictionaryDefinitions]]
+name = "project-words"
+path = "./.cspell/project-words.txt"
+addWords = true
