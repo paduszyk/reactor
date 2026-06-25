@@ -1,3 +1,4 @@
+appconf
 djlint
 envdir
 nplurals

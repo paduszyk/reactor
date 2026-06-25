@@ -21,6 +21,11 @@ ignore = [
   "S101",
 ]
 
+[lint.flake8-self]
+extend-ignore-names = [
+  "_meta",
+]
+
 [lint.isort]
 section-order = [
   "future",
