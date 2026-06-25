@@ -3,3 +3,4 @@ djlint
 envdir
 nplurals
 pytest
+usefixtures

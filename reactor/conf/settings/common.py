@@ -53,6 +53,7 @@ class CommonSettings(BaseSettings):
         "django.contrib.sessions",
         "django.contrib.messages",
         "django.contrib.staticfiles",
+        "reactor.core",
     ]
 
     # Middleware

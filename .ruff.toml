@@ -12,6 +12,9 @@ ignore = [
 ]
 
 [lint.per-file-ignores]
+"reactor/**/checks.py" = [
+  "ARG001",
+]
 "reactor/conf/settings/**/*.py" = [
   "N802",
 ]
