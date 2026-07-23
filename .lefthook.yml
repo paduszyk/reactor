@@ -1,5 +1,6 @@
 templates:
   npm-exec: npm exec --no --
+  uv-run: uv run --no-sync
 
 pre-commit:
   jobs:
@@ -12,3 +13,12 @@ pre-commit:
           - name: Lock file check
             run: |
               uv lock --check
+    - name: Ruff
+      group:
+        jobs:
+          - name: Linter
+            run: |
+              {uv-run} ruff check .
+          - name: Formatter
+            run: |
+              {uv-run} ruff format --check .
