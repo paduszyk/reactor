@@ -6,3 +6,9 @@ pre-commit:
     - name: Prettier
       run: |
         {npm-exec} prettier --check .
+    - name: uv
+      group:
+        jobs:
+          - name: Lock file check
+            run: |
+              uv lock --check
