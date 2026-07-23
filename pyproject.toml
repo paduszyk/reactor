@@ -13,6 +13,7 @@ dependencies = [
 dev = [
   { include-group = "djlint" },
   { include-group = "local" },
+  { include-group = "pytest" },
   { include-group = "ruff" },
 ]
 djlint = [
@@ -21,6 +22,15 @@ djlint = [
 local = [
   "django-debug-toolbar>=7.0.0,<8.0.0",
   "ipython>=9.15.0,<10.0.0",
+]
+pytest = [
+  "model-bakery>=1.24.0,<2.0.0",
+  "pytest>=9.1.1,<10.0.0",
+  "pytest-cov>=7.1.0,<8.0.0",
+  "pytest-django>=4.12.0,<5.0.0",
+  "pytest-env>=1.7.0,<2.0.0",
+  "pytest-mock>=3.15.1,<4.0.0",
+  "pytest-randomly>=4.1.0,<5.0.0",
 ]
 ruff = [
   "ruff>=0.15.22,<0.16.0",

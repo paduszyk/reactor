@@ -1,0 +1,12 @@
+[pytest]
+env = [
+  "DJANGO_SETTINGS_MODULE=reactor.settings.development",
+]
+addopts = [
+  "-ra",
+  "--strict-config",
+  "--strict-markers",
+]
+testpaths = [
+  "tests/",
+]
