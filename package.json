@@ -1,5 +1,7 @@
 {
   "devDependencies": {
-    "lefthook": "^2.1.10"
+    "lefthook": "^2.1.10",
+    "prettier": "^3.9.6",
+    "prettier-plugin-toml": "^2.0.6"
   }
 }

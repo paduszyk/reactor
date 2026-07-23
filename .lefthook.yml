@@ -1,2 +1,8 @@
+templates:
+  npm-exec: npm exec --no --
+
 pre-commit:
   jobs:
+    - name: Prettier
+      run: |
+        {npm-exec} prettier --check .
