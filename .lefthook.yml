@@ -22,3 +22,19 @@ pre-commit:
           - name: Formatter
             run: |
               {uv-run} ruff format --check .
+    - name: Django
+      group:
+        jobs:
+          - name: System check
+            run: |
+              {uv-run} manage.py check
+          - name: Migrations
+            run: |
+              {uv-run} manage.py makemigrations --check
+          - name: Translation files
+            run: |
+              set -e
+
+              {uv-run} manage.py makemessages --all --no-location --no-obsolete
+              git diff --exit-code -- ":(glob)**/*.po"
+              {uv-run} manage.py compilemessages --ignore=".venv"
