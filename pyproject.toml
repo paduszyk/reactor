@@ -15,6 +15,7 @@ dev = [
   { include-group = "ruff" },
 ]
 local = [
+  "django-debug-toolbar>=7.0.0,<8.0.0",
   "ipython>=9.15.0,<10.0.0",
 ]
 ruff = [
