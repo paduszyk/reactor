@@ -1,1 +1,2 @@
+reactor/**/templates/**/*.html
 uv.lock

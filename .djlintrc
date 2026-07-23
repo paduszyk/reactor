@@ -1,0 +1,17 @@
+{
+  "profile": "django",
+  "indent": 2,
+  "max_blank_lines": 1,
+  "blank_line_after_tag": [
+    "extends",
+    "load"
+  ],
+  "format_css": true,
+  "css": {
+    "indent": 2
+  },
+  "format_js": true,
+  "js": {
+    "indent": 2
+  }
+}

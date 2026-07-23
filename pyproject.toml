@@ -11,8 +11,12 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+  { include-group = "djlint" },
   { include-group = "local" },
   { include-group = "ruff" },
+]
+djlint = [
+  "djlint>=1.42.2,<2.0.0",
 ]
 local = [
   "django-debug-toolbar>=7.0.0,<8.0.0",
