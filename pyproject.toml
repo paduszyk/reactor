@@ -11,7 +11,11 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+  { include-group = "local" },
   { include-group = "ruff" },
+]
+local = [
+  "ipython>=9.15.0,<10.0.0",
 ]
 ruff = [
   "ruff>=0.15.22,<0.16.0",
