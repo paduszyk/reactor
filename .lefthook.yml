@@ -19,3 +19,17 @@ pre-commit:
           - name: Style check
             run: |
               {npm-exec} editorconfig-checker {files}
+    - name: Prettier
+      files: |
+        staged_files="$(git diff --cached --name-only --diff-filter=ACMR)"
+
+        if printf '%s\n' "$staged_files" | grep -qxF ".prettierrc.toml"; then
+          git ls-files
+        else
+          printf '%s\n' "$staged_files"
+        fi
+      group:
+        jobs:
+          - name: Format check
+            run: |
+              {npm-exec} prettier --check --ignore-unknown {files}
