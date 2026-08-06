@@ -2,6 +2,7 @@ assert_lefthook_installed: true
 
 templates:
   npm-exec: npm exec --no --
+  uv-run: uv run --no-sync
 
 pre-commit:
   jobs:
@@ -42,3 +43,22 @@ pre-commit:
           - name: Lockfile check
             run: |
               uv lock --check
+    - name: Ruff
+      glob:
+        - "*.py"
+      files: |
+        staged_files="$(git diff --cached --name-only --diff-filter=ACMR)"
+
+        if printf '%s\n' "$staged_files" | grep -qxF ".ruff.toml"; then
+          git ls-files
+        else
+          printf '%s\n' "$staged_files"
+        fi
+      group:
+        jobs:
+          - name: Lint check
+            run: |
+              {uv-run} ruff check {files}
+          - name: Format check
+            run: |
+              {uv-run} ruff format --check {files}
