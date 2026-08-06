@@ -33,3 +33,12 @@ pre-commit:
           - name: Format check
             run: |
               {npm-exec} prettier --check --ignore-unknown {files}
+    - name: uv
+      glob:
+        - "pyproject.toml"
+        - "uv.lock"
+      group:
+        jobs:
+          - name: Lockfile check
+            run: |
+              uv lock --check
