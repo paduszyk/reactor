@@ -1,1 +1,21 @@
 assert_lefthook_installed: true
+
+templates:
+  npm-exec: npm exec --no --
+
+pre-commit:
+  jobs:
+    - name: EditorConfig checker
+      files: |
+        staged_files="$(git diff --cached --name-only --diff-filter=ACMR)"
+
+        if printf '%s\n' "$staged_files" | grep -qxF ".editorconfig"; then
+          git ls-files
+        else
+          printf '%s\n' "$staged_files"
+        fi
+      group:
+        jobs:
+          - name: Style check
+            run: |
+              {npm-exec} editorconfig-checker {files}
