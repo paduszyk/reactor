@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "editorconfig-checker": "^7.0.0",
     "lefthook": "^2.1.12"
   }
 }

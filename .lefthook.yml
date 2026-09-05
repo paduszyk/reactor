@@ -1,1 +1,13 @@
 assert_lefthook_installed: true
+
+pre-commit:
+  fail_on_changes: non-ci
+  jobs:
+    - name: EditorConfig checker
+      files: |
+        if git diff --cached --quiet -- .editorconfig; then
+          git diff --cached --name-only --diff-filter=ACMR
+        else
+          git ls-files
+        fi
+      run: npm exec --no -- editorconfig-checker -fix {files}
