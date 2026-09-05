@@ -19,3 +19,13 @@ pre-commit:
           git ls-files
         fi
       run: npm exec --no -- prettier --write --ignore-unknown {files}
+    - name: uv
+      glob:
+        - pyproject.toml
+        - uv.lock
+      group:
+        jobs:
+          - name: Lock file check
+            run: uv lock --check
+          - name: Environment sync check
+            run: uv sync --check
