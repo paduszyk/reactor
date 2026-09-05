@@ -1,0 +1,9 @@
+[run]
+source = [
+  "reactor/",
+]
+
+[report]
+show_missing = true
+skip_covered = true
+skip_empty = true

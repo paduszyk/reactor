@@ -1,5 +1,7 @@
 __pycache__/
+.coverage
 .lefthook-local.yml
+.pytest_cache/
 .ruff_cache/
 .venv/
 node_modules/
