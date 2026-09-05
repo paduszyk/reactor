@@ -29,3 +29,18 @@ pre-commit:
             run: uv lock --check
           - name: Environment sync check
             run: uv sync --check
+    - name: Ruff
+      files: |
+        if git diff --cached --quiet -- .ruff.toml; then
+          git diff --cached --name-only --diff-filter=ACMR
+        else
+          git ls-files
+        fi
+      glob:
+        - "*.py"
+      group:
+        jobs:
+          - name: Lint check
+            run: uv run --no-sync ruff check --fix {files}
+          - name: Format check
+            run: uv run --no-sync ruff format {files}

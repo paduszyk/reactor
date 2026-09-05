@@ -1,0 +1,10 @@
+[lint]
+extend-select = [
+  "D",
+]
+ignore = [
+  "D1",
+]
+
+[lint.pydocstyle]
+convention = "google"
