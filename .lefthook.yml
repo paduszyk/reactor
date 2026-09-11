@@ -1,0 +1,5 @@
+assert_lefthook_installed: true
+
+pre-commit:
+  fail_on_changes: non-ci
+  jobs:
