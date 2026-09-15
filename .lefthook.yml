@@ -1,5 +1,6 @@
 templates:
   npm-exec: npm exec --no --
+  uv-run: uv run --no-sync
 
 pre-commit:
   fail_on_changes: non-ci
@@ -37,3 +38,21 @@ pre-commit:
           - name: Environment sync check
             run: |
               uv sync --check
+    - name: Ruff
+      glob:
+        - "*.py"
+      files: |
+        if git diff --cached --quiet -- .ruff.toml; then
+          git diff --cached --name-only --diff-filter=ACMR
+        else
+          git ls-files
+        fi
+      group:
+        piped: true
+        jobs:
+          - name: Lint check
+            run: |
+              {uv-run} ruff check --fix {files}
+          - name: Format check
+            run: |
+              {uv-run} ruff format {files}
