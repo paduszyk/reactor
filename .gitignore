@@ -1,2 +1,4 @@
+__pycache__/
 .lefthook-local.yml
+.venv/
 node_modules/
