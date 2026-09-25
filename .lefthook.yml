@@ -1,0 +1,4 @@
+pre-commit:
+  only:
+    - ref: main
+  jobs:
