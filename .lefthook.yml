@@ -1,5 +1,6 @@
 templates:
   npm-exec: npm exec --no --
+  uv-run: uv run --no-sync --
 
 pre-commit:
   only:
@@ -35,3 +36,21 @@ pre-commit:
           - name: Lock check
             run: |
               uv lock --check
+    - name: Ruff
+      glob:
+        - "*.py"
+      files: |
+        if git diff --cached --quiet -- .ruff.toml; then
+          git diff --cached --diff-filter=ACMR --name-only
+        else
+          git ls-files
+        fi
+      group:
+        piped: true
+        jobs:
+          - name: Linter
+            run: |
+              {uv-run} ruff check --force-exclude {files}
+          - name: Formatter
+            run: |
+              {uv-run} ruff format --force-exclude --check {files}
