@@ -23,3 +23,15 @@ pre-commit:
         fi
       run: |
         {npm-exec} prettier --check --ignore-unknown {files}
+    - name: uv
+      glob:
+        - ".python-version"
+        - "pyproject.toml"
+        - "uv.lock"
+        - "uv.toml"
+      group:
+        piped: true
+        jobs:
+          - name: Lock check
+            run: |
+              uv lock --check
