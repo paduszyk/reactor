@@ -1,4 +1,16 @@
+templates:
+  npm-exec: npm exec --no --
+
 pre-commit:
   only:
     - ref: main
   jobs:
+    - name: EditorConfig checker
+      files: |
+        if git diff --cached --quiet -- .editorconfig; then
+          git diff --cached --diff-filter=ACMR --name-only
+        else
+          git ls-files
+        fi
+      run: |
+        {npm-exec} editorconfig-checker {files}
