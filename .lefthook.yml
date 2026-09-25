@@ -14,3 +14,12 @@ pre-commit:
         fi
       run: |
         {npm-exec} editorconfig-checker {files}
+    - name: Prettier
+      files: |
+        if git diff --cached --quiet -- .prettierrc.toml; then
+          git diff --cached --diff-filter=ACMR --name-only
+        else
+          git ls-files
+        fi
+      run: |
+        {npm-exec} prettier --check --ignore-unknown {files}

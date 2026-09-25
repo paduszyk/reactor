@@ -1,6 +1,8 @@
 {
   "devDependencies": {
     "editorconfig-checker": "^7.0.0",
-    "lefthook": "^2.1.14"
+    "lefthook": "^2.1.14",
+    "prettier": "^3.9.9",
+    "prettier-plugin-toml": "^3.0.2"
   }
 }
