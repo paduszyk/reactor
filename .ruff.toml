@@ -1,10 +1,40 @@
+extend-exclude = [
+  "reactor/**/migrations/**/*.py",
+]
+
 [lint]
 select = [
   "ALL",
 ]
 ignore = [
+  "ANN",
   "CPY",
   "D1",
+  "PLC0415",
+  "RUF012",
+]
+
+[lint.per-file-ignores]
+"reactor/conf/settings/**/*.py" = [
+  "N802",
+]
+"tests/**/*.py" = [
+  "S101",
+]
+
+[lint.isort]
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "django",
+  "first-party",
+  "local-folder",
+]
+
+[lint.isort.sections]
+django = [
+  "django",
 ]
 
 [lint.pydocstyle]

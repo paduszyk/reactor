@@ -1,4 +1,10 @@
 [pytest]
+env_files = [
+  ".env",
+]
+env = [
+  "DJANGO_SETTINGS_MODULE=reactor.conf.settings.dev",
+]
 addopts = [
   "--strict",
 ]
