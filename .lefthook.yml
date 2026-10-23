@@ -21,3 +21,14 @@ pre-commit:
           - name: Formatter
             run: >-
               {npm-exec} tombi format --check {staged_files}
+    - name: uv
+      glob:
+        - ".python-version"
+        - "pyproject.toml"
+        - "uv.lock"
+      group:
+        piped: true
+        jobs:
+          - name: Lock file
+            run: >-
+              uv lock --check
