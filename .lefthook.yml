@@ -1,5 +1,6 @@
 templates:
   npm-exec: npm exec --no --
+  uv-run: uv run --no-sync --
 
 pre-commit:
   jobs:
@@ -32,3 +33,15 @@ pre-commit:
           - name: Lock file
             run: >-
               uv lock --check
+    - name: Ruff
+      glob:
+        - "*.py"
+      group:
+        piped: true
+        jobs:
+          - name: Linter
+            run: >-
+              {uv-run} ruff check --force-exclude {staged_files}
+          - name: Formatter
+            run: >-
+              {uv-run} ruff format --check --force-exclude {staged_files}
