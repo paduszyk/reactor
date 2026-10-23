@@ -6,3 +6,6 @@ pre-commit:
     - name: EditorConfig checker
       run: >-
         {npm-exec} editorconfig-checker {staged_files}
+    - name: Prettier
+      run: >-
+        {npm-exec} prettier --check --ignore-unknown {staged_files}
