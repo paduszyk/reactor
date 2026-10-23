@@ -1,2 +1,8 @@
+templates:
+  npm-exec: npm exec --no --
+
 pre-commit:
   jobs:
+    - name: EditorConfig checker
+      run: >-
+        {npm-exec} editorconfig-checker {staged_files}
