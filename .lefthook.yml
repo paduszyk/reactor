@@ -45,3 +45,31 @@ pre-commit:
           - name: Formatter
             run: >-
               {uv-run} ruff format --check --force-exclude {staged_files}
+    - name: Django
+      only:
+        - ref: main
+      env:
+        DJANGO_SETTINGS_MODULE: reactor.conf.settings.dev
+      group:
+        piped: true
+        jobs:
+          - name: System check
+            run: >-
+              {uv-run} python -m django check --fail-level=ERROR
+          - name: Migration check
+            run: |
+              {uv-run} python -m django makemigrations --skip-checks --check
+          - name: Translations
+            group:
+              piped: true
+              jobs:
+                - name: Extraction
+                  run: >-
+                    {uv-run} python -m django makemessages --all --no-location --no-obsolete
+                - name: Catalog diff
+                  run: >-
+                    git diff --exit-code -- ":(glob)**/*.po"
+                    && test -z "$(git ls-files --others --exclude-standard -- ':(glob)**/*.po')"
+                - name: Compilation
+                  run: >-
+                    {uv-run} python -m django compilemessages --ignore=".venv"
