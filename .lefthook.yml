@@ -18,3 +18,21 @@ pre-commit:
         fi
       run: >-
         npm exec --no -- prettier --check --ignore-unknown {files}
+    - name: Tombi
+      files: |
+        if git diff --cached --quiet -- .tombi.toml; then
+          git diff --cached --name-only --diff-filter=ACMR
+        else
+          git ls-files
+        fi
+      glob:
+        - "*.toml"
+      group:
+        piped: true
+        jobs:
+          - name: Linter
+            run: >-
+              npm exec --no -- tombi lint {files}
+          - name: Formatter
+            run: >-
+              npm exec --no -- tombi format --check {files}
