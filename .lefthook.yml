@@ -9,3 +9,12 @@ pre-commit:
         fi
       run: >-
         npm exec --no -- editorconfig-checker {files}
+    - name: Prettier
+      files: |
+        if git diff --cached --quiet -- .prettierrc.*; then
+          git diff --cached --name-only --diff-filter=ACMR
+        else
+          git ls-files
+        fi
+      run: >-
+        npm exec --no -- prettier --check --ignore-unknown {files}
