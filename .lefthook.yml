@@ -47,3 +47,21 @@ pre-commit:
           - name: Lock file
             run: >-
               uv lock --check
+    - name: Ruff
+      files: |
+        if git diff --cached --quiet -- .ruff.toml; then
+          git diff --cached --name-only --diff-filter=ACMR
+        else
+          git ls-files
+        fi
+      glob:
+        - "*.py"
+      group:
+        piped: true
+        jobs:
+          - name: Linter
+            run: >-
+              uv run --no-sync -- ruff check --force-exclude {files}
+          - name: Formatter
+            run: >-
+              uv run --no-sync -- ruff format --check --force-exclude {files}

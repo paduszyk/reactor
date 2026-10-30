@@ -1,0 +1,10 @@
+[lint]
+select = [
+  "ALL",
+]
+ignore = [
+  "CPY",
+]
+
+[lint.pydocstyle]
+convention = "google"
