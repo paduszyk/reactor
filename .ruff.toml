@@ -6,5 +6,10 @@ ignore = [
   "CPY",
 ]
 
+[lint.per-file-ignores]
+"tests/**/*.py" = [
+  "D1",
+]
+
 [lint.pydocstyle]
 convention = "google"

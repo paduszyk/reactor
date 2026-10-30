@@ -1,0 +1,10 @@
+[run]
+source = [
+  "reactor/",
+]
+branch = true
+
+[report]
+show_missing = true
+skip_covered = true
+skip_empty = true

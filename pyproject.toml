@@ -5,7 +5,14 @@ requires-python = ">=3.15"
 
 [dependency-groups]
 dev = [
+  { include-group = "pytest" },
   { include-group = "ruff" },
+]
+pytest = [
+  "pytest>=9.2.0",
+  "pytest-cov>=7.1.0",
+  "pytest-mock>=3.17.0",
+  "pytest-randomly>=5.0.0",
 ]
 ruff = [
   "ruff>=0.17.3",
