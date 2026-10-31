@@ -1,11 +1,51 @@
 """Django settings for application development environments."""
 
+import abc
+
 from reactor.conf import env
 
 from . import common
 
 
-class Settings(common.Settings):
+class Extension(abc.ABC):
+    """Optional mixin for development settings.
+
+    Extensions group settings and behavior for optional integrations. Direct
+    subclasses must implement `is_enabled` and be defined or imported before
+    `Settings` is defined below. Enabled extensions precede the common
+    settings base in reverse definition order, so later extensions take
+    precedence. Attributes defined on development settings take precedence
+    over extensions.
+
+    Extensions can provide uppercase settings or override properties and methods.
+    Overrides can use `super()` to build on the next extension or the settings
+    class. Mutable settings should be copied before modification to avoid
+    changing inherited values.
+    """
+
+    @classmethod
+    @abc.abstractmethod
+    def is_enabled(cls):
+        """Return whether this extension should be applied."""
+
+
+def get_enabled_extensions():
+    """Return enabled extension classes in settings precedence order.
+
+    Only direct subclasses of `Extension` already defined or imported are
+    considered. The returned list contains classes whose `is_enabled` method
+    returns a truthy value, with later-defined classes first so they take
+    precedence when used as settings bases.
+    """
+    extensions = reversed(Extension.__subclasses__())
+
+    return [extension for extension in extensions if extension.is_enabled()]
+
+
+enabled_extensions = get_enabled_extensions()
+
+
+class Settings(*enabled_extensions, common.Settings):
     """Settings for application development environments."""
 
     # Debugging

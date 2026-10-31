@@ -20,6 +20,69 @@ def configure_environment(mocker):
     )
 
 
+@pytest.fixture
+def extension_subclasses(mocker):
+    """Wrap `Extension.__subclasses__` for each requesting test.
+
+    The original method is restored afterward; created subclasses are not removed.
+    """
+    mocker.patch.object(
+        dev.Extension,
+        "__subclasses__",
+        wraps=dev.Extension.__subclasses__,
+    )
+
+
+@pytest.mark.usefixtures("extension_subclasses")
+class TestGetEnabledExtensions:
+    def test_get_enabled_extensions_includes_enabled(self):
+        # Arrange.
+        class EnabledExtension(dev.Extension):
+            @classmethod
+            def is_enabled(cls):
+                return True
+
+        # Act.
+        enabled_extensions = dev.get_enabled_extensions()
+
+        # Assert.
+        assert EnabledExtension in enabled_extensions
+
+    def test_get_enabled_extensions_excludes_disabled(self):
+        # Arrange.
+        class DisabledExtension(dev.Extension):
+            @classmethod
+            def is_enabled(cls):
+                return False
+
+        # Act.
+        enabled_extensions = dev.get_enabled_extensions()
+
+        # Assert.
+        assert DisabledExtension not in enabled_extensions
+
+    def test_get_enabled_extensions_prioritizes_later_defined(self):
+        # Arrange.
+        class EarlierExtension(dev.Extension):
+            @classmethod
+            def is_enabled(cls):
+                return True
+
+        class LaterExtension(dev.Extension):
+            @classmethod
+            def is_enabled(cls):
+                return True
+
+        # Act.
+        enabled_extensions = dev.get_enabled_extensions()
+
+        earlier_index = enabled_extensions.index(EarlierExtension)
+        later_index = enabled_extensions.index(LaterExtension)
+
+        # Assert.
+        assert later_index < earlier_index
+
+
 class TestSettings:
     def test_get_storage_config_uses_staticfiles_storage(self):
         # Arrange.
