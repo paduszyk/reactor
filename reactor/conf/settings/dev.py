@@ -1,6 +1,7 @@
 """Django settings for application development environments."""
 
 import abc
+from importlib import metadata
 
 from reactor.conf import env
 
@@ -27,6 +28,161 @@ class Extension(abc.ABC):
     @abc.abstractmethod
     def is_enabled(cls):
         """Return whether this extension should be applied."""
+
+
+class DebugToolbarExtension(Extension):
+    """Optional `django-debug-toolbar` integration for development settings."""
+
+    @classmethod
+    def is_enabled(cls):
+        """Return whether `django-debug-toolbar` is installed and enabled.
+
+        The extension is disabled if the package is not installed. Otherwise,
+        `DEBUG_TOOLBAR_ENABLED` controls enablement and defaults to `True`.
+        """
+        try:
+            metadata.distribution("django-debug-toolbar")
+        except metadata.PackageNotFoundError:
+            return False
+
+        return env.bool("DEBUG_TOOLBAR_ENABLED", default=True)
+
+    # Security
+
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
+
+    # Apps
+
+    @property
+    def INSTALLED_APPS(self):
+        """Return inherited apps with `django-debug-toolbar` appended."""
+        installed_apps = super().INSTALLED_APPS.copy()
+
+        installed_apps += [
+            "debug_toolbar",
+        ]
+
+        return installed_apps
+
+    # Middleware
+
+    @property
+    def MIDDLEWARE(self):
+        """Return inherited middleware with `django-debug-toolbar` appended."""
+        middleware = super().MIDDLEWARE.copy()
+
+        middleware += [
+            "debug_toolbar.middleware.DebugToolbarMiddleware",
+        ]
+
+        return middleware
+
+    # URLs
+
+    @classmethod
+    def get_urlpatterns(cls):
+        """Return inherited routes with `django-debug-toolbar` routes appended."""
+        urlpatterns = super().get_urlpatterns()
+
+        from django.urls import include, path
+
+        urlpatterns += [
+            path("__debug__/", include("debug_toolbar.urls")),
+        ]
+
+        return urlpatterns
+
+
+class BrowserReloadExtension(Extension):
+    """Optional `django-browser-reload` integration for development settings."""
+
+    @classmethod
+    def is_enabled(cls):
+        """Return whether `django-browser-reload` is installed and enabled.
+
+        The extension is disabled if the package is not installed. Otherwise,
+        `BROWSER_RELOAD_ENABLED` controls enablement and defaults to `True`.
+        """
+        try:
+            metadata.distribution("django-browser-reload")
+        except metadata.PackageNotFoundError:
+            return False
+
+        return env.bool("BROWSER_RELOAD_ENABLED", default=True)
+
+    # Apps
+
+    @property
+    def INSTALLED_APPS(self):
+        """Return inherited apps with `django-browser-reload` appended."""
+        installed_apps = super().INSTALLED_APPS.copy()
+
+        installed_apps += [
+            "django_browser_reload",
+        ]
+
+        return installed_apps
+
+    # Middleware
+
+    @property
+    def MIDDLEWARE(self):
+        """Return inherited middleware with `django-browser-reload` appended."""
+        middleware = super().MIDDLEWARE.copy()
+
+        middleware += [
+            "django_browser_reload.middleware.BrowserReloadMiddleware",
+        ]
+
+        return middleware
+
+    # URLs
+
+    @classmethod
+    def get_urlpatterns(cls):
+        """Return inherited routes with `django-browser-reload` routes appended."""
+        urlpatterns = super().get_urlpatterns()
+
+        from django.urls import include, path
+
+        urlpatterns += [
+            path("__reload__/", include("django_browser_reload.urls")),
+        ]
+
+        return urlpatterns
+
+
+class WatchfilesExtension(Extension):
+    """Optional `django-watchfiles` integration for development settings."""
+
+    @classmethod
+    def is_enabled(cls):
+        """Return whether `django-watchfiles` is installed and enabled.
+
+        The extension is disabled if the package is not installed. Otherwise,
+        `WATCHFILES_ENABLED` controls enablement and defaults to `True`.
+        """
+        try:
+            metadata.distribution("django-watchfiles")
+        except metadata.PackageNotFoundError:
+            return False
+
+        return env.bool("WATCHFILES_ENABLED", default=True)
+
+    # Apps
+
+    @property
+    def INSTALLED_APPS(self):
+        """Return inherited apps with `django-watchfiles` appended."""
+        installed_apps = super().INSTALLED_APPS.copy()
+
+        installed_apps += [
+            "django_watchfiles",
+        ]
+
+        return installed_apps
 
 
 def get_enabled_extensions():

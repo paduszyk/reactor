@@ -9,8 +9,14 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+  { include-group = "local" },
   { include-group = "pytest" },
   { include-group = "ruff" },
+]
+local = [
+  "django-browser-reload>=1.21.0",
+  "django-debug-toolbar>=8.0.0",
+  "django-watchfiles>=1.4.0",
 ]
 pytest = [
   "pytest>=9.2.0",
